@@ -7,7 +7,8 @@ export const initialState = {
 		searchValue: '',
 		selectedPokemons: [],
 		pokemonList: undefined
-	}
+	},
+	pokepreview: {}
 }
 
 const middleware = applyMiddleware(promise())
