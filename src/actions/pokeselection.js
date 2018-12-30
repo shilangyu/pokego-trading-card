@@ -1,4 +1,4 @@
-export const markAsSelected = pokemonId => ({
-	type: 'MARK_AS_SELECTED',
+export const togglePokemonSelection = pokemonId => ({
+	type: 'TOGGLE_POKEMON_SELECTION',
 	pokemonId
 })

@@ -1,15 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Pokefield extends Component {
-	render() {
-		const { name, id } = this.props
-		return (
-			<>
-				<input type="checkbox" name={name} />
-				<label htmlFor={name}>{name}</label>
-			</>
-		)
-	}
-}
-
-export default Pokefield
+export default ({ name, id, togglePokemonSelection, selected }) => (
+	<>
+		<input type="checkbox" name={name} onClick={() => togglePokemonSelection(id)} defaultChecked={selected} />
+		<label htmlFor={name}>{name}</label>
+	</>
+)

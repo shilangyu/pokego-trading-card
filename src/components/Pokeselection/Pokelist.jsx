@@ -48,12 +48,19 @@ class Pokelist extends Component {
 	}
 
 	render() {
+		const { togglePokemonSelection, selectedPokemons } = this.props
+
 		return (
 			<div style={styles.root}>
 				<form style={styles.form}>
 					{this.state.pokemons.map(({ name, id }) => (
 						<div key={name}>
-							<Pokefield name={name} id={id}/>
+							<Pokefield
+								name={name}
+								id={id}
+								selected={selectedPokemons.includes(id)}
+								togglePokemonSelection={togglePokemonSelection}
+							/>
 						</div>
 					))}
 				</form>
