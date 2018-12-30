@@ -1,16 +1,15 @@
 import { connect } from 'react-redux'
 
-// import { togglePokemonSelection, updateSearchValue, loadPokemonList } from '../actions'
+import urls from '../constants/api.json'
 
 import Pokepreview from '../components/Pokepreview'
 
-const mapStatesToProps = ({ pokepreview: state }) => ({
-	...state
+const mapStatesToProps = ({ pokeselection }) => ({
+	spriteUrls: pokeselection.selectedPokemons.map(id => urls.sprite.replace(':id', id))
 })
 
 const mapDispatchToProps = dispatch => {
-	return {
-	}
+	return {}
 }
 
 export default connect(

@@ -4,8 +4,8 @@ import { togglePokemonSelection, updateSearchValue, loadPokemonList } from '../a
 
 import Pokeselection from '../components/Pokeselection'
 
-const mapStatesToProps = ({ pokeselection: state }) => ({
-	...state
+const mapStatesToProps = ({ pokeselection }) => ({
+	...pokeselection
 })
 
 const mapDispatchToProps = dispatch => {
