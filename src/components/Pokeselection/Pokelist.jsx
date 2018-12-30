@@ -22,14 +22,13 @@ class Pokelist extends Component {
 				<form style={styles.form}>
 					{pokemonList.map(({ name, id }) =>
 						name.includes(searchValue) ? (
-							<div key={name}>
-								<Pokefield
-									name={name}
-									id={id}
-									selected={selectedPokemons.includes(id)}
-									togglePokemonSelection={togglePokemonSelection}
-								/>
-							</div>
+							<Pokefield
+								key={name}
+								name={name}
+								id={id}
+								selected={selectedPokemons.includes(id)}
+								togglePokemonSelection={togglePokemonSelection}
+							/>
 						) : null
 					)}
 				</form>
