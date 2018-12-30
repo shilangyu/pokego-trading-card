@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import config from '../../constants/config.json'
-import apiUrl from '../../constants/api.json'
 import Pokefield from './Pokefield.jsx'
 import store from '../../store'
 
@@ -19,43 +17,16 @@ const styles = {
 }
 
 class Pokelist extends Component {
-	state = {
-		pokemons: []
-	}
-
-	async componentDidMount() {
-		const calls = config.existingPokemon.generations.map(
-			e => apiUrl.base + apiUrl.generation.replace(':id', e)
-		)
-		const responses = await Promise.all(calls.map(e => fetch(e)))
-		const results = await Promise.all(responses.map(e => e.json()))
-
-		const pokemons = results.reduce((prev, curr) => {
-			const idExtractor = /\/(?<id>\d{1,3})\/$/
-
-			const pokeWithIds = curr.pokemon_species.map(({ name, url }) => ({
-				name,
-				url,
-				id: Number(idExtractor.exec(url).groups.id)
-			}))
-
-			return [...prev, ...pokeWithIds]
-		}, [])
-		pokemons.sort((a, b) => a.id - b.id)
-
-		this.setState({
-			pokemons: pokemons
-		})
-	}
-
 	render() {
-		const { togglePokemonSelection, selectedPokemons } = this.props
+		const { togglePokemonSelection, selectedPokemons, pokemonList } = this.props
 		const { searchValue } = store.getState().pokeselection
 
-		return (
+		return pokemonList === undefined ? (
+			<> Pokemons loading... </>
+		) : pokemonList ? (
 			<div style={styles.root}>
 				<form style={styles.form}>
-					{this.state.pokemons.map(({ name, id }) =>
+					{pokemonList.map(({ name, id }) =>
 						name.includes(searchValue) ? (
 							<div key={name}>
 								<Pokefield
@@ -69,6 +40,8 @@ class Pokelist extends Component {
 					)}
 				</form>
 			</div>
+		) : (
+			<> Error loading the Pokemons! </>
 		)
 	}
 }

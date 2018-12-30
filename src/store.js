@@ -1,12 +1,15 @@
-import { createStore } from 'redux'
-
+import { createStore, applyMiddleware } from 'redux'
+import promise from 'redux-promise-middleware'
 import rootReducer from './reducers'
 
 export const initialState = {
 	pokeselection: {
 		searchValue: '',
-		selectedPokemons: []
+		selectedPokemons: [],
+		pokemonList: undefined
 	}
 }
 
-export default createStore(rootReducer, initialState)
+const middleware = applyMiddleware(promise())
+
+export default createStore(rootReducer, initialState, middleware)
