@@ -3,6 +3,15 @@ import config from '../constants/config.json'
 import apiUrl from '../constants/api.json'
 import Pokefield from './Pokefield.jsx'
 
+const styles = {
+	root: {
+		width: '100%',
+		height: '30rem',
+		'overflow-y': 'scroll',
+		'background-color': 'rgb(150, 150, 150)'
+	}
+}
+
 class Pokelist extends Component {
 	state = {
 		pokemons: []
@@ -31,11 +40,13 @@ class Pokelist extends Component {
 
 	render() {
 		return (
-			<form>
-				{this.state.pokemons.map(({ name }) => (
-					<Pokefield key={name} name={name} />
-				))}
-			</form>
+			<div style={styles.root}>
+				<form>
+					{this.state.pokemons.map(({ name }) => (
+						<Pokefield key={name} name={name} />
+					))}
+				</form>
+			</div>
 		)
 	}
 }
