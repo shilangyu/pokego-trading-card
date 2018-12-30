@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 
 class Pokefield extends Component {
 	render() {
+		const { name } = this.props
 		return (
 			<>
-				<input type="checkbox" name={this.props.name} />
-				<label for={this.props.name}>{this.props.name}</label>
+				<input type="checkbox" name={name} />
+				<label htmlFor={name}>{name}</label>
 			</>
 		)
 	}

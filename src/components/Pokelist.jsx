@@ -7,8 +7,8 @@ const styles = {
 	root: {
 		width: '100%',
 		height: '30rem',
-		'overflow-y': 'scroll',
-		'background-color': 'rgb(150, 150, 150)'
+		overflowY: 'scroll',
+		backgroundColor: 'rgb(150, 150, 150)'
 	}
 }
 
