@@ -24,9 +24,10 @@ export default (state = {}, action) => {
 
 		case 'TOGGLE_NEEDED_POKEMON_SELECTION': {
 			let neededPokemons = []
-			if (neededPokemons.includes(action.pokemonId))
+			if (state.neededPokemons.includes(action.pokemonId))
 				neededPokemons = state.neededPokemons.filter(e => e !== action.pokemonId)
 			else neededPokemons = [...state.neededPokemons, action.pokemonId]
+
 			return { ...state, neededPokemons }
 		}
 
