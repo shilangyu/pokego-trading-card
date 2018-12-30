@@ -6,6 +6,7 @@ export const initialState = {
 	pokeselection: {
 		searchValue: '',
 		neededPokemons: [],
+		offeredPokemons: [],
 		pokemonList: undefined
 	},
 	pokepreview: {}

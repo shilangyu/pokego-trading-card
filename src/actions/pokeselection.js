@@ -19,6 +19,11 @@ export const toggleNeededPokemonSelection = pokemonId => ({
 	pokemonId
 })
 
+export const toggleOfferedPokemonSelection = pokemonId => ({
+	type: 'TOGGLE_OFFERED_POKEMON_SELECTION',
+	pokemonId
+})
+
 export const updateSearchValue = value => ({
 	type: 'UPDATE_SEARCH_VALUE',
 	value

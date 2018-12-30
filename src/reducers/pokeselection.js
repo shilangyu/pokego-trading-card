@@ -31,6 +31,15 @@ export default (state = {}, action) => {
 			return { ...state, neededPokemons }
 		}
 
+		case 'TOGGLE_OFFERED_POKEMON_SELECTION': {
+			let offeredPokemons = []
+			if (state.offeredPokemons.includes(action.pokemonId))
+				offeredPokemons = state.offeredPokemons.filter(e => e !== action.pokemonId)
+			else offeredPokemons = [...state.offeredPokemons, action.pokemonId]
+
+			return { ...state, offeredPokemons }
+		}
+
 		case 'UPDATE_SEARCH_VALUE': {
 			const searchValue = action.value
 			return { ...state, searchValue }

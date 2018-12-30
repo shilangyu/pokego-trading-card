@@ -3,12 +3,6 @@ import Pokefield from './Pokefield.jsx'
 import store from '../../store'
 
 const styles = {
-	root: {
-		width: '100%',
-		height: '30rem',
-		overflowY: 'scroll',
-		backgroundColor: 'rgb(150, 150, 150)'
-	},
 	form: {
 		display: 'grid',
 		gridTemplateColumns: 'repeat(auto-fit, 130px)',
@@ -18,13 +12,13 @@ const styles = {
 
 class Pokelist extends Component {
 	render() {
-		const { togglePokemonSelection, selectedPokemons, pokemonList } = this.props
+		const { togglePokemonSelection, selectedPokemons, pokemonList, rootStyles } = this.props
 		const { searchValue } = store.getState().pokeselection
 
 		return pokemonList === undefined ? (
 			<> Pokemons loading... </>
 		) : pokemonList ? (
-			<div style={styles.root}>
+			<div style={rootStyles}>
 				<form style={styles.form}>
 					{pokemonList.map(({ name, id }) =>
 						name.includes(searchValue) ? (
