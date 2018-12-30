@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import config from '../../constants/config.json'
 import apiUrl from '../../constants/api.json'
 import Pokefield from './Pokefield.jsx'
+import store from '../../store'
 
 const styles = {
 	root: {
@@ -49,20 +50,23 @@ class Pokelist extends Component {
 
 	render() {
 		const { togglePokemonSelection, selectedPokemons } = this.props
+		const { searchValue } = store.getState().pokeselection
 
 		return (
 			<div style={styles.root}>
 				<form style={styles.form}>
-					{this.state.pokemons.map(({ name, id }) => (
-						<div key={name}>
-							<Pokefield
-								name={name}
-								id={id}
-								selected={selectedPokemons.includes(id)}
-								togglePokemonSelection={togglePokemonSelection}
-							/>
-						</div>
-					))}
+					{this.state.pokemons.map(({ name, id }) =>
+						name.includes(searchValue) ? (
+							<div key={name}>
+								<Pokefield
+									name={name}
+									id={id}
+									selected={selectedPokemons.includes(id)}
+									togglePokemonSelection={togglePokemonSelection}
+								/>
+							</div>
+						) : null
+					)}
 				</form>
 			</div>
 		)
