@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class Pokefield extends Component {
 	render() {
-		const { name } = this.props
+		const { name, id } = this.props
 		return (
 			<>
 				<input type="checkbox" name={name} />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import config from '../constants/config.json'
-import apiUrl from '../constants/api.json'
+import config from '../../constants/config.json'
+import apiUrl from '../../constants/api.json'
 import Pokefield from './Pokefield.jsx'
 
 const styles = {
@@ -51,9 +51,9 @@ class Pokelist extends Component {
 		return (
 			<div style={styles.root}>
 				<form style={styles.form}>
-					{this.state.pokemons.map(({ name }) => (
+					{this.state.pokemons.map(({ name, id }) => (
 						<div key={name}>
-							<Pokefield name={name} />
+							<Pokefield name={name} id={id}/>
 						</div>
 					))}
 				</form>

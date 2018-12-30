@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import Pokelist from './components/Pokelist.jsx'
+import Pokeselection from './components/Pokeselection'
 
 class App extends Component {
 	render() {
 		return (
-			<Pokelist/>
+			<Pokeselection/>
 		)
 	}
 }
