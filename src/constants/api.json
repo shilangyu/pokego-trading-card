@@ -1,0 +1,5 @@
+{
+	"base": "https://pokeapi.co/api/v2/",
+	"generation": "generation/:id/",
+	"pokemon": "pokemon/:id/"
+}
