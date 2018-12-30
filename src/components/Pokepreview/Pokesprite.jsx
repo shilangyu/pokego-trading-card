@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image } from 'react-konva'
+import { Image, Text } from 'react-konva'
 
 class Pokesprite extends Component {
 	state = {
@@ -15,7 +15,11 @@ class Pokesprite extends Component {
 	render() {
 		const { x, y } = this.props
 
-		return <Image image={this.state.image} x={x} y={y} />
+		return this.state.image ? (
+			<Image image={this.state.image} x={x} y={y} />
+		) : (
+			<Text text="Loading sprite..." x={x} y={y} />
+		)
 	}
 }
 
