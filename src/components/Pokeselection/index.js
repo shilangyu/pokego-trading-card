@@ -5,16 +5,16 @@ import Pokebar from './Pokebar.jsx'
 export default ({
 	searchValue,
 	updateSearchValue,
-	selectedPokemons,
-	togglePokemonSelection,
+	neededPokemons,
+	toggleNeededPokemonSelection,
 	pokemonList
 }) => (
 	<>
 		<Pokebar searchValue={searchValue} updateSearchValue={updateSearchValue} />
 		<Pokelist
 			pokemonList={pokemonList}
-			selectedPokemons={selectedPokemons}
-			togglePokemonSelection={togglePokemonSelection}
+			selectedPokemons={neededPokemons}
+			togglePokemonSelection={toggleNeededPokemonSelection}
 		/>
 	</>
 )

@@ -14,8 +14,8 @@ export const loadPokemonList = {
 	})()
 }
 
-export const togglePokemonSelection = pokemonId => ({
-	type: 'TOGGLE_POKEMON_SELECTION',
+export const toggleNeededPokemonSelection = pokemonId => ({
+	type: 'TOGGLE_NEEDED_POKEMON_SELECTION',
 	pokemonId
 })
 

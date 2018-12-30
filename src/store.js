@@ -5,7 +5,7 @@ import rootReducer from './reducers'
 export const initialState = {
 	pokeselection: {
 		searchValue: '',
-		selectedPokemons: [],
+		neededPokemons: [],
 		pokemonList: undefined
 	},
 	pokepreview: {}

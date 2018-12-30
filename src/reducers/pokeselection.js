@@ -22,12 +22,12 @@ export default (state = {}, action) => {
 			return { ...state, pokemonList }
 		}
 
-		case 'TOGGLE_POKEMON_SELECTION': {
-			let selectedPokemons = []
-			if (selectedPokemons.includes(action.pokemonId))
-				selectedPokemons = state.selectedPokemons.filter(e => e !== action.pokemonId)
-			else selectedPokemons = [...state.selectedPokemons, action.pokemonId]
-			return { ...state, selectedPokemons }
+		case 'TOGGLE_NEEDED_POKEMON_SELECTION': {
+			let neededPokemons = []
+			if (neededPokemons.includes(action.pokemonId))
+				neededPokemons = state.neededPokemons.filter(e => e !== action.pokemonId)
+			else neededPokemons = [...state.neededPokemons, action.pokemonId]
+			return { ...state, neededPokemons }
 		}
 
 		case 'UPDATE_SEARCH_VALUE': {
