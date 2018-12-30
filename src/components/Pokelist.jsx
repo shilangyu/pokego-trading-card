@@ -9,6 +9,11 @@ const styles = {
 		height: '30rem',
 		overflowY: 'scroll',
 		backgroundColor: 'rgb(150, 150, 150)'
+	},
+	form: {
+		display: 'grid',
+		gridTemplateColumns: 'repeat(auto-fit, 130px)',
+		gridGap: '10px'
 	}
 }
 
@@ -24,14 +29,18 @@ class Pokelist extends Component {
 		const responses = await Promise.all(calls.map(e => fetch(e)))
 		const results = await Promise.all(responses.map(e => e.json()))
 
-		const pokemons = results.reduce((prev, curr) => [...prev, ...curr.pokemon_species], [])
-		pokemons.sort((...compared) => {
+		const pokemons = results.reduce((prev, curr) => {
 			const idExtractor = /\/(?<id>\d{1,3})\/$/
 
-			const ids = compared.map(e => Number(idExtractor.exec(e.url).groups.id))
+			const pokeWithIds = curr.pokemon_species.map(({ name, url }) => ({
+				name,
+				url,
+				id: Number(idExtractor.exec(url).groups.id)
+			}))
 
-			return ids[0] - ids[1]
-		})
+			return [...prev, ...pokeWithIds]
+		}, [])
+		pokemons.sort((a, b) => a.id - b.id)
 
 		this.setState({
 			pokemons: pokemons
@@ -41,9 +50,11 @@ class Pokelist extends Component {
 	render() {
 		return (
 			<div style={styles.root}>
-				<form>
+				<form style={styles.form}>
 					{this.state.pokemons.map(({ name }) => (
-						<Pokefield key={name} name={name} />
+						<div key={name}>
+							<Pokefield name={name} />
+						</div>
 					))}
 				</form>
 			</div>
