@@ -9,7 +9,7 @@ const styles = {
 		width: '50%',
 		height: '30rem',
 		overflowY: 'scroll',
-		backgroundColor: 'rgb(150, 150, 150)'
+		// backgroundColor: 'rgb(150, 150, 150)'
 	}
 }
 
