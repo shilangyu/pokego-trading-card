@@ -4,7 +4,7 @@ class Pokebar extends Component {
 	render() {
 		const { searchValue, updateSearchValue } = this.props
 
-		return <input type="text" value={searchValue} onChange={e => updateSearchValue(e.target.value)}/>
+		return <input type="search" value={searchValue} onChange={e => updateSearchValue(e.target.value)}/>
 	}
 }
 
