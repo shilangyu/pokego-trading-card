@@ -18,7 +18,7 @@ export default class extends Component {
 		return (
 			<Stage width={width} height={height}>
 				<Layer>
-					<Pokesection {...this.props} text="Pokemons I'm looking for" config={config} />
+					<Pokesection {...this.props} text="Pokemons I'm looking for" config={config} yOffset={0}/>
 				</Layer>
 			</Stage>
 		)

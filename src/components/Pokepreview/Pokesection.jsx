@@ -4,7 +4,7 @@ import Pokesprite from './Pokesprite.jsx'
 
 class Pokesection extends Component {
 	render() {
-		const { spriteUrls, text, config } = this.props
+		const { spriteUrls, text, config, yOffset } = this.props
 
 		const width = Math.min(config.sprite.perRow, spriteUrls.length) * config.sprite.offset.x
 		const height = Math.ceil(spriteUrls.length / config.sprite.perRow) * config.sprite.offset.y
@@ -12,6 +12,7 @@ class Pokesection extends Component {
 		return (
 			<>
 				<Rect
+					y={yOffset}
 					width={width}
 					height={height}
 					fillLinearGradientStartPoint={{ x: 0, y: 0 }}
@@ -19,6 +20,7 @@ class Pokesection extends Component {
 					fillLinearGradientColorStops={[0, '#113977', 1, '#4689f2']}
 				/>
 				<Text
+					y={yOffset}
 					text={text}
 					width={width}
 					height={height}
@@ -29,7 +31,7 @@ class Pokesection extends Component {
 				/>
 				{spriteUrls.map((url, i) => {
 					const x = config.sprite.offset.x * (i % config.sprite.perRow)
-					const y = config.sprite.offset.y * Math.floor(i / config.sprite.perRow)
+					const y = config.sprite.offset.y * Math.floor(i / config.sprite.perRow) + yOffset
 					return <Pokesprite key={url} url={url} x={x} y={y} />
 				})}
 			</>
