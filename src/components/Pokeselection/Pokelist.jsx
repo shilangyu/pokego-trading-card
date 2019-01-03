@@ -1,40 +1,42 @@
 import React, { Component } from 'react'
 import Pokefield from './Pokefield.jsx'
 import store from '../../store'
-
-const styles = {
-	form: {
-		display: 'grid',
-		gridTemplateColumns: 'repeat(auto-fit, 130px)',
-		gridGap: '10px'
-	}
-}
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import Toast from '../dumb/Toast.jsx'
 
 class Pokelist extends Component {
 	render() {
 		const { addPokemonSelection, selectedPokemons, pokemonList, rootStyles } = this.props
 		const { searchValue } = store.getState().pokeselection
 
-		return pokemonList === undefined ? (
-			<> Pokemons loading... </>
-		) : pokemonList ? (
-			<div style={rootStyles}>
-				<form style={styles.form}>
-					{pokemonList.map(({ name, id }) =>
-						name.includes(searchValue) ? (
-							<Pokefield
-								key={name}
-								name={name}
-								id={id}
-								selected={selectedPokemons.includes(id)}
-								addPokemonSelection={variation => addPokemonSelection(id, variation)}
-							/>
-						) : null
-					)}
-				</form>
-			</div>
-		) : (
-			<> Error loading the Pokemons! </>
+		return (
+			<Paper style={rootStyles}>
+				{pokemonList === undefined ? (
+					<>
+						<LinearProgress /> <br />
+						<Toast variant="info">Loading pokémons...</Toast>
+					</>
+				) : pokemonList ? (
+					<Grid container spacing={24}>
+						{pokemonList.map(({ name, id }) =>
+							name.includes(searchValue) ? (
+								<Grid item key={name} xs={12} lg={4} md={6}>
+									<Pokefield
+										name={name}
+										id={id}
+										selected={selectedPokemons.includes(id)}
+										addPokemonSelection={variation => addPokemonSelection(id, variation)}
+									/>
+								</Grid>
+							) : null
+						)}
+					</Grid>
+				) : (
+					<> Error loading the Pokemons! </>
+				)}
+			</Paper>
 		)
 	}
 }
