@@ -4,6 +4,7 @@
 	"homepage": "https://shilangyu.github.io/pokego-trading-card",
 	"private": true,
 	"dependencies": {
+		"@material-ui/core": "^3.8.1",
 		"konva": "^2.6.0",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",

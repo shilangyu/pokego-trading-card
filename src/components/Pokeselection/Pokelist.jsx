@@ -12,7 +12,7 @@ const styles = {
 
 class Pokelist extends Component {
 	render() {
-		const { togglePokemonSelection, selectedPokemons, pokemonList, rootStyles } = this.props
+		const { addPokemonSelection, selectedPokemons, pokemonList, rootStyles } = this.props
 		const { searchValue } = store.getState().pokeselection
 
 		return pokemonList === undefined ? (
@@ -27,7 +27,7 @@ class Pokelist extends Component {
 								name={name}
 								id={id}
 								selected={selectedPokemons.includes(id)}
-								togglePokemonSelection={togglePokemonSelection}
+								addPokemonSelection={variation => addPokemonSelection(id, variation)}
 							/>
 						) : null
 					)}

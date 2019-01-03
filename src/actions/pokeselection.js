@@ -14,14 +14,16 @@ export const loadPokemonList = {
 	})()
 }
 
-export const toggleNeededPokemonSelection = pokemonId => ({
-	type: 'TOGGLE_NEEDED_POKEMON_SELECTION',
-	pokemonId
+export const addNeededPokemonSelection = (pokemonId, variation) => ({
+	type: 'ADD_NEEDED_POKEMON_SELECTION',
+	pokemonId,
+	variation
 })
 
-export const toggleOfferedPokemonSelection = pokemonId => ({
-	type: 'TOGGLE_OFFERED_POKEMON_SELECTION',
-	pokemonId
+export const addOfferedPokemonSelection = (pokemonId, variation) => ({
+	type: 'ADD_OFFERED_POKEMON_SELECTION',
+	pokemonId,
+	variation
 })
 
 export const updateSearchValue = value => ({

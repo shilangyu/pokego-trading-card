@@ -17,9 +17,9 @@ export default ({
 	searchValue,
 	updateSearchValue,
 	neededPokemons,
-	toggleNeededPokemonSelection,
+	addNeededPokemonSelection,
 	offeredPokemons,
-	toggleOfferedPokemonSelection,
+	addOfferedPokemonSelection,
 	pokemonList
 }) => (
 	<>
@@ -28,13 +28,13 @@ export default ({
 			rootStyles={styles.pokelist}
 			pokemonList={pokemonList}
 			selectedPokemons={neededPokemons}
-			togglePokemonSelection={toggleNeededPokemonSelection}
+			addPokemonSelection={addNeededPokemonSelection}
 		/>
 		<Pokelist
 			rootStyles={styles.pokelist}
 			pokemonList={pokemonList}
 			selectedPokemons={offeredPokemons}
-			togglePokemonSelection={toggleOfferedPokemonSelection}
+			addPokemonSelection={addOfferedPokemonSelection}
 		/>
 	</>
 )

@@ -1,6 +1,11 @@
 import { connect } from 'react-redux'
 
-import { toggleNeededPokemonSelection, updateSearchValue, loadPokemonList, toggleOfferedPokemonSelection } from '../actions'
+import {
+	addNeededPokemonSelection,
+	updateSearchValue,
+	loadPokemonList,
+	addOfferedPokemonSelection
+} from '../actions'
 
 import Pokeselection from '../components/Pokeselection'
 
@@ -12,8 +17,10 @@ const mapDispatchToProps = dispatch => {
 	dispatch(loadPokemonList)
 
 	return {
-		toggleNeededPokemonSelection: pokemonId => dispatch(toggleNeededPokemonSelection(pokemonId)),
-		toggleOfferedPokemonSelection: pokemonId => dispatch(toggleOfferedPokemonSelection(pokemonId)),
+		addNeededPokemonSelection: (pokemonId, variation) =>
+			dispatch(addNeededPokemonSelection(pokemonId, variation)),
+		addOfferedPokemonSelection: (pokemonId, variation) =>
+			dispatch(addOfferedPokemonSelection(pokemonId, variation)),
 		updateSearchValue: value => dispatch(updateSearchValue(value))
 	}
 }
