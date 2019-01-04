@@ -38,7 +38,8 @@ class Pokefield extends React.Component {
 	handleChange = event => {
 		const { name, value } = event.target
 		this.setState({ [name]: value })
-		this.props.addPokemonSelection(value)
+
+		if (value) this.props.addPokemonSelection(value)
 	}
 
 	render() {

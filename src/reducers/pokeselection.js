@@ -23,21 +23,43 @@ export default (state = {}, action) => {
 		}
 
 		case 'ADD_NEEDED_POKEMON_SELECTION': {
-			const neededPokemons = [...state.neededPokemons]
-			neededPokemons.push({
-				pokemonId: action.pokemonId,
-				variation: action.variation
-			})
+			let neededPokemons = [...state.neededPokemons]
+
+			if (neededPokemons.find(e => e.pokemonId === action.pokemonId))
+				neededPokemons = state.neededPokemons.map(e =>
+					e.pokemonId === action.pokemonId
+						? {
+								pokemonId: action.pokemonId,
+								variation: action.variation
+						  }
+						: e
+				)
+			else
+				neededPokemons.push({
+					pokemonId: action.pokemonId,
+					variation: action.variation
+				})
 
 			return { ...state, neededPokemons }
 		}
 
 		case 'ADD_OFFERED_POKEMON_SELECTION': {
-			const offeredPokemons = [...state.offeredPokemons]
-			offeredPokemons.push({
-				pokemonId: action.pokemonId,
-				variation: action.variation
-			})
+			let offeredPokemons = [...state.offeredPokemons]
+
+			if (offeredPokemons.find(e => e.pokemonId === action.pokemonId))
+				offeredPokemons = state.offeredPokemons.map(e =>
+					e.pokemonId === action.pokemonId
+						? {
+								pokemonId: action.pokemonId,
+								variation: action.variation
+						  }
+						: e
+				)
+			else
+				offeredPokemons.push({
+					pokemonId: action.pokemonId,
+					variation: action.variation
+				})
 
 			return { ...state, offeredPokemons }
 		}
