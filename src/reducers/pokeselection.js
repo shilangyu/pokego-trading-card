@@ -77,7 +77,7 @@ export default (state = {}, action) => {
 		}
 
 		case 'UPDATE_SEARCH_VALUE': {
-			const searchValue = action.value
+			const searchValue = action.value.toLowerCase()
 			return { ...state, searchValue }
 		}
 

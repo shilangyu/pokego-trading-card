@@ -27,7 +27,7 @@ class Pokelist extends Component {
 				) : pokemonList ? (
 					<Grid container spacing={24}>
 						{pokemonList.map(({ name, id }) =>
-							name.includes(searchValue) ? (
+							name.includes(searchValue.toLowerCase()) ? (
 								<Grid item key={name} xs={12} sm={6} md={4} lg={3} xl={2}>
 									<Pokefield
 										name={name}
