@@ -13,7 +13,6 @@ class Pokebar extends Component {
 			<TextField
 				onChange={this.onChange}
 				label="Search"
-				style={{ margin: 8 }}
 				fullWidth
 				margin="normal"
 				variant="outlined"

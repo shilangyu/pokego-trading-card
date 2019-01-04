@@ -7,8 +7,10 @@ const styles = {
 	pokelist: {
 		display: 'inline-block',
 		width: '50%',
+		maxWidth: '50%',
 		height: '30rem',
-		overflowY: 'scroll'
+		overflowY: 'scroll',
+		overflowX: 'hidden'
 	}
 }
 
