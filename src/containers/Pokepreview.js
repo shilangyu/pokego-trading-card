@@ -6,10 +6,10 @@ import Pokepreview from '../components/Pokepreview'
 
 const mapStatesToProps = ({ pokeselection }) => ({
 	neededSpriteUrls: pokeselection.neededPokemons.map(({ pokemonId, variation }) =>
-		urls.sprite.replace(':id', pokemonId)
+		urls.sprite.replace(':id', (variation === 'shiny' ? 'shiny/' : '') + pokemonId)
 	),
 	offeredSpriteUrls: pokeselection.offeredPokemons.map(({ pokemonId, variation }) =>
-		urls.sprite.replace(':id', pokemonId)
+		urls.sprite.replace(':id', (variation === 'shiny' ? 'shiny/' : '') + pokemonId)
 	)
 })
 
