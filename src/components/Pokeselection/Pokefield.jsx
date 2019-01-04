@@ -40,6 +40,7 @@ class Pokefield extends React.Component {
 		this.setState({ [name]: value })
 
 		if (value) this.props.addPokemonSelection(value)
+		else this.props.removePokemonSelection()
 	}
 
 	render() {

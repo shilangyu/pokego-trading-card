@@ -64,6 +64,18 @@ export default (state = {}, action) => {
 			return { ...state, offeredPokemons }
 		}
 
+		case 'REMOVE_NEEDED_POKEMON_SELECTION': {
+			const neededPokemons = state.neededPokemons.filter(e => e.pokemonId !== action.pokemonId)
+
+			return { ...state, neededPokemons }
+		}
+
+		case 'REMOVE_OFFERED_POKEMON_SELECTION': {
+			const offeredPokemons = state.offeredPokemons.filter(e => e.pokemonId !== action.pokemonId)
+
+			return { ...state, offeredPokemons }
+		}
+
 		case 'UPDATE_SEARCH_VALUE': {
 			const searchValue = action.value
 			return { ...state, searchValue }

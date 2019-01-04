@@ -8,7 +8,13 @@ import Toast from '../dumb/Toast.jsx'
 
 class Pokelist extends Component {
 	render() {
-		const { addPokemonSelection, selectedPokemons, pokemonList, rootStyles } = this.props
+		const {
+			addPokemonSelection,
+			removePokemonSelection,
+			selectedPokemons,
+			pokemonList,
+			rootStyles
+		} = this.props
 		const { searchValue } = store.getState().pokeselection
 
 		return (
@@ -28,6 +34,7 @@ class Pokelist extends Component {
 										id={id}
 										selected={selectedPokemons.includes(id)}
 										addPokemonSelection={variation => addPokemonSelection(id, variation)}
+										removePokemonSelection={() => removePokemonSelection(id)}
 									/>
 								</Grid>
 							) : null

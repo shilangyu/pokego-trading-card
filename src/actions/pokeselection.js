@@ -26,6 +26,16 @@ export const addOfferedPokemonSelection = (pokemonId, variation) => ({
 	variation
 })
 
+export const removeNeededPokemonSelection = pokemonId => ({
+	type: 'REMOVE_NEEDED_POKEMON_SELECTION',
+	pokemonId
+})
+
+export const removeOfferedPokemonSelection = pokemonId => ({
+	type: 'REMOVE_OFFERED_POKEMON_SELECTION',
+	pokemonId
+})
+
 export const updateSearchValue = value => ({
 	type: 'UPDATE_SEARCH_VALUE',
 	value

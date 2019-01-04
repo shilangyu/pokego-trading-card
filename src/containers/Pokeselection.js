@@ -4,7 +4,9 @@ import {
 	addNeededPokemonSelection,
 	updateSearchValue,
 	loadPokemonList,
-	addOfferedPokemonSelection
+	addOfferedPokemonSelection,
+	removeNeededPokemonSelection,
+	removeOfferedPokemonSelection
 } from '../actions'
 
 import Pokeselection from '../components/Pokeselection'
@@ -21,6 +23,8 @@ const mapDispatchToProps = dispatch => {
 			dispatch(addNeededPokemonSelection(pokemonId, variation)),
 		addOfferedPokemonSelection: (pokemonId, variation) =>
 			dispatch(addOfferedPokemonSelection(pokemonId, variation)),
+		removeNeededPokemonSelection: pokemonId => dispatch(removeNeededPokemonSelection(pokemonId)),
+		removeOfferedPokemonSelection: pokemonId => dispatch(removeOfferedPokemonSelection(pokemonId)),
 		updateSearchValue: value => dispatch(updateSearchValue(value))
 	}
 }

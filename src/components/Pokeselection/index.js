@@ -16,8 +16,10 @@ export default ({
 	updateSearchValue,
 	neededPokemons,
 	addNeededPokemonSelection,
+	removeNeededPokemonSelection,
 	offeredPokemons,
 	addOfferedPokemonSelection,
+	removeOfferedPokemonSelection,
 	pokemonList
 }) => (
 	<Grid container spacing={24}>
@@ -30,7 +32,8 @@ export default ({
 				pokemonList={pokemonList}
 				selectedPokemons={neededPokemons}
 				addPokemonSelection={addNeededPokemonSelection}
-			/>
+				removePokemonSelection={removeNeededPokemonSelection}
+				/>
 		</Grid>
 		<Grid item xs={6}>
 			<Pokelist
@@ -38,6 +41,7 @@ export default ({
 				pokemonList={pokemonList}
 				selectedPokemons={offeredPokemons}
 				addPokemonSelection={addOfferedPokemonSelection}
+				removePokemonSelection={removeNeededPokemonSelection}
 			/>
 		</Grid>
 	</Grid>
