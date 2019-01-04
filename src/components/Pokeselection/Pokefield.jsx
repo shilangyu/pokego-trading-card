@@ -24,8 +24,7 @@ const styles = theme => ({
 
 class Pokefield extends React.Component {
 	state = {
-		age: '',
-		name: 'hai',
+		variation: '',
 		labelWidth: 0
 	}
 
@@ -36,25 +35,26 @@ class Pokefield extends React.Component {
 	}
 
 	handleChange = event => {
-		const { name, value } = event.target
-		this.setState({ [name]: value })
+		const { value } = event.target
+
+		if (value === this.state.variation) return
+
+		this.setState({ variation: value })
 
 		if (value) this.props.addPokemonSelection(value)
 		else this.props.removePokemonSelection()
 	}
 
 	render() {
-		const { classes, name, selected } = this.props
+		const { classes, name } = this.props
 
 		return (
 			<FormControl variant="outlined" className={classes.formControl}>
-				<InputLabel ref={ref => (this.InputLabelRef = ref)} htmlFor="outlined-age-simple">
-					{name}
-				</InputLabel>
+				<InputLabel ref={ref => (this.InputLabelRef = ref)}>{name}</InputLabel>
 				<Select
-					value={this.state.age}
+					value={this.state.variation}
 					onChange={this.handleChange}
-					input={<OutlinedInput labelWidth={this.state.labelWidth} name="age" />}
+					input={<OutlinedInput labelWidth={this.state.labelWidth} />}
 				>
 					<MenuItem value="">
 						<em>None</em>
