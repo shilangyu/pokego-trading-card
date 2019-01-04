@@ -17,31 +17,43 @@ class Pokelist extends Component {
 		} = this.props
 		const { searchValue } = store.getState().pokeselection
 
+		const searchedPokemons = (pokemonList || []).reduce(
+			(prev, { id, name }) => {
+				if (name.includes(searchValue.toLowerCase())) {
+					const { variation = '' } =
+						selectedPokemons.find(e => e.pokemonId === id) || {}
+					prev.push({ name, id, variation })
+				}
+				return prev
+			},
+			[]
+		)
+
 		return (
 			<Paper style={rootStyles}>
 				{pokemonList === undefined ? (
 					<>
-						<LinearProgress /> <br />
+						<LinearProgress />
 						<Toast variant="info">Loading pokémons...</Toast>
 					</>
 				) : pokemonList ? (
 					<Grid container spacing={24}>
-						{pokemonList.map(({ name, id }) =>
-							name.includes(searchValue.toLowerCase()) ? (
-								<Grid item key={name} xs={12} sm={6} md={4} lg={3} xl={2}>
-									<Pokefield
-										name={name}
-										id={id}
-										selected={selectedPokemons.includes(id)}
-										addPokemonSelection={variation => addPokemonSelection(id, variation)}
-										removePokemonSelection={() => removePokemonSelection(id)}
-									/>
-								</Grid>
-							) : null
-						)}
+						{searchedPokemons.map(({ name, id, variation }) => (
+							<Grid item key={name} xs={12} sm={6} md={4} lg={3} xl={2}>
+								<Pokefield
+									name={name}
+									id={id}
+									addPokemonSelection={variation =>
+										addPokemonSelection(id, variation)
+									}
+									variation={variation}
+									removePokemonSelection={() => removePokemonSelection(id)}
+								/>
+							</Grid>
+						))}
 					</Grid>
 				) : (
-					<> Error loading the Pokemons! </>
+					<Toast variant="error">Error loading the Pokemons!</Toast>
 				)}
 			</Paper>
 		)

@@ -24,7 +24,6 @@ const styles = theme => ({
 
 class Pokefield extends React.Component {
 	state = {
-		variation: '',
 		labelWidth: 0
 	}
 
@@ -37,22 +36,20 @@ class Pokefield extends React.Component {
 	handleChange = event => {
 		const { value } = event.target
 
-		if (value === this.state.variation) return
-
-		this.setState({ variation: value })
+		if (value === this.props.variation) return
 
 		if (value) this.props.addPokemonSelection(value)
 		else this.props.removePokemonSelection()
 	}
 
 	render() {
-		const { classes, name } = this.props
+		const { classes, name, variation } = this.props
 
 		return (
 			<FormControl variant="outlined" className={classes.formControl}>
 				<InputLabel ref={ref => (this.InputLabelRef = ref)}>{name}</InputLabel>
 				<Select
-					value={this.state.variation}
+					value={variation}
 					onChange={this.handleChange}
 					input={<OutlinedInput labelWidth={this.state.labelWidth} />}
 				>
