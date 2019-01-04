@@ -41,7 +41,7 @@ export default ({
 				pokemonList={pokemonList}
 				selectedPokemons={offeredPokemons}
 				addPokemonSelection={addOfferedPokemonSelection}
-				removePokemonSelection={removeNeededPokemonSelection}
+				removePokemonSelection={removeOfferedPokemonSelection}
 			/>
 		</Grid>
 	</Grid>
