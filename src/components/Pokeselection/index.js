@@ -1,13 +1,10 @@
 import React from 'react'
 import Pokelist from './Pokelist.jsx'
 import Pokebar from './Pokebar.jsx'
+import Grid from '@material-ui/core/Grid'
 
 const styles = {
-	pokebar: {},
 	pokelist: {
-		display: 'inline-block',
-		width: '50%',
-		maxWidth: '50%',
 		height: '30rem',
 		overflowY: 'scroll',
 		overflowX: 'hidden'
@@ -23,19 +20,25 @@ export default ({
 	addOfferedPokemonSelection,
 	pokemonList
 }) => (
-	<>
-		<Pokebar searchValue={searchValue} updateSearchValue={updateSearchValue} /> <br />
-		<Pokelist
-			rootStyles={styles.pokelist}
-			pokemonList={pokemonList}
-			selectedPokemons={neededPokemons}
-			addPokemonSelection={addNeededPokemonSelection}
-		/>
-		<Pokelist
-			rootStyles={styles.pokelist}
-			pokemonList={pokemonList}
-			selectedPokemons={offeredPokemons}
-			addPokemonSelection={addOfferedPokemonSelection}
-		/>
-	</>
+	<Grid container spacing={24}>
+		<Grid item xs={12}>
+			<Pokebar searchValue={searchValue} updateSearchValue={updateSearchValue} /> <br />
+		</Grid>
+		<Grid item xs={6}>
+			<Pokelist
+				rootStyles={styles.pokelist}
+				pokemonList={pokemonList}
+				selectedPokemons={neededPokemons}
+				addPokemonSelection={addNeededPokemonSelection}
+			/>
+		</Grid>
+		<Grid item xs={6}>
+			<Pokelist
+				rootStyles={styles.pokelist}
+				pokemonList={pokemonList}
+				selectedPokemons={offeredPokemons}
+				addPokemonSelection={addOfferedPokemonSelection}
+			/>
+		</Grid>
+	</Grid>
 )
