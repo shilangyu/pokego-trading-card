@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/pokego-trading-card/static/js/runtime~main.9e4c6ed0.js"
   },
   {
-    "revision": "dbaa7de564c1e04feae1",
-    "url": "/pokego-trading-card/static/js/main.dbaa7de5.chunk.js"
+    "revision": "2e27d71a610167a46f49",
+    "url": "/pokego-trading-card/static/js/main.2e27d71a.chunk.js"
   },
   {
     "revision": "c6489c60c562215c11db",
     "url": "/pokego-trading-card/static/js/1.c6489c60.chunk.js"
   },
   {
-    "revision": "1ae92002da520f01c1a83c4005a286cb",
+    "revision": "f312f19a9b29aa95c758c0dee2c28968",
     "url": "/pokego-trading-card/index.html"
   }
 ];
