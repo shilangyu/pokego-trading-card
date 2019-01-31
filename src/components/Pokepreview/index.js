@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Stage, Layer } from 'react-konva'
 import Pokesection from './Pokesection.jsx'
 
+import context from '../../context'
+import pokemonList from '../../constants/pokemonData'
+
 const config = {
 	sprite: {
 		offset: { x: 100, y: 100 },
@@ -10,8 +13,16 @@ const config = {
 }
 
 export default class extends Component {
+	static contextType = context
+
 	render() {
-		const { neededSpriteUrls, offeredSpriteUrls } = this.props
+		const neededSpriteUrls = this.context.neededPokemons.map(
+			({ id }) => pokemonList.find(e => e.id === id).sprite
+		)
+
+		const offeredSpriteUrls = this.context.offeredPokemons.map(
+			({ id }) => pokemonList.find(e => e.id === id).sprite
+		)
 
 		const width1 = Math.min(config.sprite.perRow, neededSpriteUrls.length) * config.sprite.offset.x
 		const height1 =

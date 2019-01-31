@@ -1,16 +1,52 @@
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import Pokeselection from '../containers/Pokeselection'
-import Pokepreview from '../containers/Pokepreview'
-import store from '../store'
+import Pokeselection from './Pokeselection'
+import Pokepreview from './Pokepreview'
+import Context from '../context'
 
 class App extends Component {
+	state = {
+		searchValue: '',
+		neededPokemons: [],
+		offeredPokemons: []
+	}
+
+	updateSearchValue = newVal => this.setState({ searchValue: newVal })
+
+	addNeededPokemonSelection = (id, variation) =>
+		this.setState(prevState => ({
+			neededPokemons: [
+				...prevState.neededPokemons,
+				{
+					id,
+					variation
+				}
+			]
+		}))
+
+	addOfferedPokemonSelection = (id, variation) =>
+		this.setState(prevState => ({
+			offeredPokemons: [
+				...prevState.offeredPokemons,
+				{
+					id,
+					variation
+				}
+			]
+		}))
+
 	render() {
 		return (
-			<Provider store={store}>
+			<Context.Provider
+				value={{
+					...this.state,
+					updateSearchValue: this.updateSearchValue,
+					addNeededPokemonSelection: this.addNeededPokemonSelection,
+					addOfferedPokemonSelection: this.addOfferedPokemonSelection,
+				}}
+			>
 				<Pokeselection />
 				<Pokepreview />
-			</Provider>
+			</Context.Provider>
 		)
 	}
 }

@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
+import context from '../../context.js'
 
 class Pokebar extends Component {
+	static contextType = context
+
 	onChange = event => {
-		this.props.updateSearchValue(event.target.value)
+		this.context.updateSearchValue(event.target.value)
 	}
 
 	render() {
-		const { searchValue } = this.props
+		const { searchValue } = this.context
 
 		return (
 			<TextField

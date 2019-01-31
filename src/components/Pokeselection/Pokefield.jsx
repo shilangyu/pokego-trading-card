@@ -38,13 +38,12 @@ class Pokefield extends React.Component {
 
 		if (value === this.props.variation) return
 
-		if (value) this.props.addPokemonSelection(value)
-		else this.props.removePokemonSelection()
+		this.props.addPokemonSelection(value)
 	}
 
 	render() {
 		const { classes, name, variation } = this.props
-
+		
 		return (
 			<FormControl variant="outlined" className={classes.formControl}>
 				<InputLabel ref={ref => (this.InputLabelRef = ref)}>{name}</InputLabel>
