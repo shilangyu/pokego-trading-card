@@ -6,10 +6,7 @@ dependencies:
   react: 16.7.0
   react-dom: 16.7.0
   react-konva: 16.7.1
-  react-redux: 6.0.0
   react-scripts: 2.1.2
-  redux: 4.0.1
-  redux-promise-middleware: 5.1.1
 devDependencies:
   gh-pages: 2.0.1
 packages:
@@ -9052,20 +9049,6 @@ packages:
       react: ^16.0.0
     resolution:
       integrity: sha512-EsHf/CsgI2elGHrH1nQTouWJrAZZ3EE93qcY6dXd0bOC3HirVMBn2JriQO2TAGHle0yq2g+QwfC/LohoWExLRg==
-  /react-redux/6.0.0:
-    dependencies:
-      '@babel/runtime': 7.3.1
-      hoist-non-react-statics: 3.3.0
-      invariant: 2.2.4
-      loose-envify: 1.4.0
-      prop-types: 15.6.2
-      react-is: 16.7.0
-    dev: false
-    peerDependencies:
-      react: ^16.4.0-0
-      redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
-    resolution:
-      integrity: sha512-EmbC3uLl60pw2VqSSkj6HpZ6jTk12RMrwXMBdYtM6niq0MdEaRq9KYCwpJflkOZj349BLGQm1MI/JO1W96kLWQ==
   /react-scripts/2.1.2:
     dependencies:
       '@babel/core': 7.1.6
@@ -9244,19 +9227,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
-  /redux-promise-middleware/5.1.1:
-    dev: false
-    peerDependencies:
-      redux: ^2.0.0 || ^3.0.0 || ^4.0.0
-    resolution:
-      integrity: sha512-YC1tiheU28Hgmtu5HHMLiuveLgjL1aCJWsSnwquMiZBcj5i/J9qVLt6vgOnb0Gz37y4deJ/rjiNt7l6Dh+Z8lA==
-  /redux/4.0.1:
-    dependencies:
-      loose-envify: 1.4.0
-      symbol-observable: 1.2.0
-    dev: false
-    resolution:
-      integrity: sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
   /regenerate-unicode-properties/7.0.0:
     dependencies:
       regenerate: 1.4.0
@@ -11354,7 +11324,4 @@ specifiers:
   react: ^16.7.0
   react-dom: ^16.7.0
   react-konva: ^16.7.1
-  react-redux: ^6.0.0
   react-scripts: 2.1.2
-  redux: ^4.0.1
-  redux-promise-middleware: ^5.1.1
