@@ -27,7 +27,8 @@ const styles = theme => ({
 
 class Pokefield extends React.Component {
 	state = {
-		labelWidth: 0
+		labelWidth: 0,
+		value: ''
 	}
 
 	static contextType = context
@@ -40,6 +41,7 @@ class Pokefield extends React.Component {
 
 	handleChange = ({ target: { value } }) => {
 		this.props.addPokemonSelection(value)
+		this.setState({ value })
 	}
 
 	render() {
@@ -52,7 +54,7 @@ class Pokefield extends React.Component {
 					<FormControl variant="outlined" className={classes.formControl}>
 						<InputLabel ref={ref => (this.InputLabelRef = ref)}>{name}</InputLabel>
 						<Select
-							value={''}
+							value={this.state.value}
 							onChange={this.handleChange}
 							input={<OutlinedInput labelWidth={this.state.labelWidth} />}
 						>
