@@ -12,21 +12,10 @@ class App extends Component {
 
 	updateSearchValue = newVal => this.setState({ searchValue: newVal })
 
-	addNeededPokemonSelection = (id, variation) =>
+	addPokemonSelectionFunc = prefix => (id, variation) =>
 		this.setState(prevState => ({
-			neededPokemons: [
-				...prevState.neededPokemons,
-				{
-					id,
-					variation
-				}
-			]
-		}))
-
-	addOfferedPokemonSelection = (id, variation) =>
-		this.setState(prevState => ({
-			offeredPokemons: [
-				...prevState.offeredPokemons,
+			[prefix + 'Pokemons']: [
+				...prevState[prefix + 'Pokemons'],
 				{
 					id,
 					variation
@@ -40,8 +29,8 @@ class App extends Component {
 				value={{
 					...this.state,
 					updateSearchValue: this.updateSearchValue,
-					addNeededPokemonSelection: this.addNeededPokemonSelection,
-					addOfferedPokemonSelection: this.addOfferedPokemonSelection,
+					addNeededPokemonSelection: this.addPokemonSelectionFunc('needed'),
+					addOfferedPokemonSelection: this.addPokemonSelectionFunc('offered')
 				}}
 			>
 				<Pokeselection />
