@@ -12,16 +12,34 @@ class App extends Component {
 
 	updateSearchValue = newVal => this.setState({ searchValue: newVal })
 
-	addPokemonSelectionFunc = prefix => (id, variation) =>
-		this.setState(prevState => ({
-			[prefix + 'Pokemons']: [
-				...prevState[prefix + 'Pokemons'],
-				{
-					id,
-					variation
-				}
-			]
-		}))
+	addPokemonSelectionFunc = prefix => (id, variation) => {
+		const found = this.state[prefix + 'Pokemons'].find(e => id === e.id)
+
+		if (!found)
+			this.setState(prevState => ({
+				[prefix + 'Pokemons']: [
+					...prevState[prefix + 'Pokemons'],
+					{
+						id,
+						variation
+					}
+				]
+			}))
+		else if (variation === '')
+			this.setState(prevState => ({
+				[prefix + 'Pokemons']: [...prevState[prefix + 'Pokemons'].filter(e => e.id !== id)]
+			}))
+		else if (variation !== found.variation)
+			this.setState(prevState => ({
+				[prefix + 'Pokemons']: [
+					...prevState[prefix + 'Pokemons'].filter(e => e.id !== id),
+					{
+						id,
+						variation
+					}
+				]
+			}))
+	}
 
 	render() {
 		return (
