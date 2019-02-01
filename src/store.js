@@ -17,7 +17,7 @@ export const addPokemonSelectionFunc = prefix =>
 	notify((id, variation) => {
 		const found = store[prefix + 'Pokemons'].find(e => id === e.id)
 
-		if (!found)
+		if (!found && variation !== '')
 			store[prefix + 'Pokemons'] = [
 				...store[prefix + 'Pokemons'],
 				{
