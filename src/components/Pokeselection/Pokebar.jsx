@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
-import context from '../../context.js'
+
+import { updateSearchValue } from '../../store'
 
 class Pokebar extends Component {
-	static contextType = context
-
 	onChange = event => {
-		this.context.updateSearchValue(event.target.value)
+		updateSearchValue(event.target.value)
 	}
 
 	render() {
-		const { searchValue } = this.context
-
 		return (
 			<TextField
 				onChange={this.onChange}
@@ -19,7 +16,6 @@ class Pokebar extends Component {
 				fullWidth
 				margin="normal"
 				variant="outlined"
-				value={searchValue}
 			/>
 		)
 	}

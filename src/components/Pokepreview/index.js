@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Stage, Layer } from 'react-konva'
 import Pokesection from './Pokesection.jsx'
 
-import context from '../../context'
 import pokemonList from '../../constants/pokemonData'
+import { getState, listen } from '../../store'
 
 const config = {
 	sprite: {
@@ -13,14 +13,16 @@ const config = {
 }
 
 export default class extends Component {
-	static contextType = context
-
+	componentDidMount() {
+		listen(() => this.forceUpdate())
+	}
+	
 	render() {
-		const neededSpriteUrls = this.context.neededPokemons.map(
+		const neededSpriteUrls = getState().neededPokemons.map(
 			({ id }) => pokemonList.find(e => e.id === id).sprite
 		)
 
-		const offeredSpriteUrls = this.context.offeredPokemons.map(
+		const offeredSpriteUrls = getState().offeredPokemons.map(
 			({ id }) => pokemonList.find(e => e.id === id).sprite
 		)
 

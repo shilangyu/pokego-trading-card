@@ -3,7 +3,7 @@ import Pokelist from './Pokelist.jsx'
 import Pokebar from './Pokebar.jsx'
 import Grid from '@material-ui/core/Grid'
 
-import context from '../../context'
+import { addPokemonSelectionFunc } from '../../store'
 
 const styles = {
 	pokelist: {
@@ -14,8 +14,6 @@ const styles = {
 }
 
 export default class extends Component {
-	static contextType = context
-
 	render() {
 		return (
 			<Grid container spacing={24}>
@@ -25,13 +23,13 @@ export default class extends Component {
 				<Grid item xs={6}>
 					<Pokelist
 						rootStyles={styles.pokelist}
-						addPokemonSelection={this.context.addNeededPokemonSelection}
+						addPokemonSelection={addPokemonSelectionFunc('needed')}
 					/>
 				</Grid>
 				<Grid item xs={6}>
 					<Pokelist
 						rootStyles={styles.pokelist}
-						addPokemonSelection={this.context.addOfferedPokemonSelection}
+						addPokemonSelection={addPokemonSelectionFunc('offered')}
 					/>
 				</Grid>
 			</Grid>
