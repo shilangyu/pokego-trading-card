@@ -1,6 +1,0 @@
-{
-	"base": "https://pokeapi.co/api/v2/",
-	"generation": "generation/:id/",
-	"pokemon": "pokemon/:id/",
-	"sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/:id.png"
-}
