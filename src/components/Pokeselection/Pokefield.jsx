@@ -37,7 +37,8 @@ class Pokefield extends React.Component {
 			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
 		})
 		listen(({ searchValue }) => {
-			this.setState({ visible: this.props.name.includes(searchValue.toLowerCase()) })
+			const searched = this.props.name.includes(searchValue.toLowerCase())
+			if (searched !== this.state.visible) this.setState({ visible: searched })
 		})
 	}
 
