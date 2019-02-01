@@ -25,14 +25,12 @@ export default class extends Component {
 				<Grid item xs={6}>
 					<Pokelist
 						rootStyles={styles.pokelist}
-						selectedPokemons={this.context.neededPokemons}
 						addPokemonSelection={this.context.addNeededPokemonSelection}
 					/>
 				</Grid>
 				<Grid item xs={6}>
 					<Pokelist
 						rootStyles={styles.pokelist}
-						selectedPokemons={this.context.offeredPokemons}
 						addPokemonSelection={this.context.addOfferedPokemonSelection}
 					/>
 				</Grid>

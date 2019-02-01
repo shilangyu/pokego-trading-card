@@ -6,6 +6,9 @@ import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import Grid from '@material-ui/core/Grid'
+
+import context from '../../context'
 
 const styles = theme => ({
 	formControl: {
@@ -27,41 +30,44 @@ class Pokefield extends React.Component {
 		labelWidth: 0
 	}
 
+	static contextType = context
+
 	componentDidMount() {
 		this.setState({
 			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
 		})
 	}
 
-	handleChange = event => {
-		const { value } = event.target
-
-		if (value === this.props.variation) return
-
+	handleChange = ({ target: { value } }) => {
 		this.props.addPokemonSelection(value)
 	}
 
 	render() {
-		const { classes, name, variation } = this.props
-		
-		return (
-			<FormControl variant="outlined" className={classes.formControl}>
-				<InputLabel ref={ref => (this.InputLabelRef = ref)}>{name}</InputLabel>
-				<Select
-					value={variation}
-					onChange={this.handleChange}
-					input={<OutlinedInput labelWidth={this.state.labelWidth} />}
-				>
-					<MenuItem value="">
-						<em>None</em>
-					</MenuItem>
-					<MenuItem value={'normal'}>Normal</MenuItem>
-					<MenuItem value={'shiny'}>
-						<span className={classes.shiny}>Shiny</span>
-					</MenuItem>
-				</Select>
-			</FormControl>
-		)
+		const { classes, name } = this.props
+		const { searchValue } = this.context
+
+		if (name.includes(searchValue.toLowerCase()))
+			return (
+				<Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+					<FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel ref={ref => (this.InputLabelRef = ref)}>{name}</InputLabel>
+						<Select
+							value={''}
+							onChange={this.handleChange}
+							input={<OutlinedInput labelWidth={this.state.labelWidth} />}
+						>
+							<MenuItem value="">
+								<em>None</em>
+							</MenuItem>
+							<MenuItem value={'normal'}>Normal</MenuItem>
+							<MenuItem value={'shiny'}>
+								<span className={classes.shiny}>Shiny</span>
+							</MenuItem>
+						</Select>
+					</FormControl>
+				</Grid>
+			)
+		else return null
 	}
 }
 
