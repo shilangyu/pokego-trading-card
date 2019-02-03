@@ -8,6 +8,7 @@ class Pokesprite extends Component {
 
 	componentDidMount() {
 		const image = new window.Image()
+		image.crossOrigin = 'Anonymous'
 		image.src = this.props.url
 		image.onload = () => this.setState({ image })
 		image.onerror = () => this.setState({ image: null })
