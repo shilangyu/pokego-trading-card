@@ -17,7 +17,10 @@ const styles = theme => ({
 
 class Pokemenu extends Component {
 	onSaveButtonClick(e) {
-		// console.log(document.querySelector('canvas').toDataURL('image/png'))
+		const a = document.createElement('a')
+		a.href = document.querySelector('canvas').toDataURL('image/png')
+		a.download = 'Trading-Card.png'
+		a.click()
 	}
 
 	onExportButtonClick(e) {
