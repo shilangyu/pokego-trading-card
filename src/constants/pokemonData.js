@@ -1,7 +1,10 @@
 const Pokemon = (name, id) => ({
 	name,
 	pokeapiUrl: `https://pokeapi.co/api/v2/pokemon-species/${id}/`,
-	sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+	sprites: {
+		normal: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+		shiny: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`
+	},
 	id
 })
 
@@ -34,10 +37,10 @@ export default [
 	new Pokemon('raichu', 26),
 	new Pokemon('sandshrew', 27),
 	new Pokemon('sandslash', 28),
-	new Pokemon('nidoran-f', 29),
+	new Pokemon('nidoran♀', 29),
 	new Pokemon('nidorina', 30),
 	new Pokemon('nidoqueen', 31),
-	new Pokemon('nidoran-m', 32),
+	new Pokemon('nidoran♂', 32),
 	new Pokemon('nidorino', 33),
 	new Pokemon('nidoking', 34),
 	new Pokemon('clefairy', 35),

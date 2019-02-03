@@ -19,11 +19,11 @@ export default class extends Component {
 	
 	render() {
 		const neededSpriteUrls = getState().neededPokemons.map(
-			({ id }) => pokemonList.find(e => e.id === id).sprite
+			({ id, variation }) => pokemonList.find(e => e.id === id).sprites[variation]
 		)
 
 		const offeredSpriteUrls = getState().offeredPokemons.map(
-			({ id }) => pokemonList.find(e => e.id === id).sprite
+			({ id, variation  }) => pokemonList.find(e => e.id === id).sprites[variation]
 		)
 
 		const width1 = Math.min(config.sprite.perRow, neededSpriteUrls.length) * config.sprite.offset.x
