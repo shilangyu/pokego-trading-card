@@ -3,8 +3,9 @@ import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import SaveIcon from '@material-ui/icons/Save'
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp'
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
 
-import { getState } from '../../store'
+import { getState, loadTradingCardData } from '../../store'
 
 const styles = theme => ({
 	button: {
@@ -34,6 +35,22 @@ class Pokemenu extends Component {
 		a.click()
 	}
 
+	onImportButtonClick() {
+		const input = document.createElement('input')
+		input.type = 'file'
+		input.onchange = ({ target: { files } }) => {
+			if (files.length !== 1 || !/.*\.json$/.test(files[0].name)) {
+				console.error('wrong file')
+			}
+			const reader = new FileReader()
+
+			reader.onload = ({ target: { result } }) => loadTradingCardData(JSON.parse(result))
+
+			reader.readAsText(files[0])
+		}
+		input.click()
+	}
+
 	render() {
 		const { classes } = this.props
 
@@ -46,6 +63,10 @@ class Pokemenu extends Component {
 				<Button variant="contained" className={classes.button} onClick={this.onExportButtonClick}>
 					<KeyboardArrowUp className={classes.leftIcon} />
 					Export
+				</Button>
+				<Button variant="contained" className={classes.button} onClick={this.onImportButtonClick}>
+					<KeyboardArrowDown className={classes.leftIcon} />
+					Import
 				</Button>
 			</>
 		)

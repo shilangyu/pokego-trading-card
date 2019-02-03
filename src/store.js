@@ -36,3 +36,8 @@ export const addPokemonSelectionFunc = prefix =>
 				}
 			]
 	})
+
+export const loadTradingCardData = notify(({ neededPokemons, offeredPokemons }) => {
+	store.neededPokemons = neededPokemons
+	store.offeredPokemons = offeredPokemons
+})
