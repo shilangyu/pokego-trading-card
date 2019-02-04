@@ -9,9 +9,10 @@ class App extends Component {
 		return (
 			<>
 				<CssBaseline />
-				<Pokeselection />
-				<Pokepreview />
-				<Pokeappbar />
+				<Pokeappbar>
+					<Pokeselection />
+					<Pokepreview />
+				</Pokeappbar>
 			</>
 		)
 	}

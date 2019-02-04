@@ -30,6 +30,9 @@ const styles = theme => ({
 		left: 0,
 		right: 0,
 		margin: '0 auto'
+	},
+	content: {
+		paddingBottom: 50
 	}
 })
 
@@ -83,7 +86,7 @@ class Pokeappbar extends React.Component {
 	onSearchButtonClick = e => document.querySelector('#searchBar').focus()
 
 	render() {
-		const { classes } = this.props
+		const { classes, children } = this.props
 		const { importError } = this.state
 
 		return (
@@ -91,6 +94,7 @@ class Pokeappbar extends React.Component {
 				{importError && (
 					<Toast variant="error">Could not import the trading card, incorrect file :(</Toast>
 				)}
+				<div className={classes.content}>{children}</div>
 				<AppBar position="fixed" color="primary" className={classes.appBar}>
 					<Toolbar className={classes.toolbar}>
 						<Fab
