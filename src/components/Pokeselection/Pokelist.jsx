@@ -18,11 +18,12 @@ class Pokelist extends Component {
 							{title}
 						</Typography>
 					</Grid>
-					{pokemonList.map(({ name, id }) => (
+					{pokemonList.map(({ name, id, hasShiny }) => (
 						<Pokefield
 							key={id}
 							name={name}
 							id={id}
+							hasShiny={hasShiny}
 							dataPrefix={dataPrefix}
 							addPokemonSelection={variation => addPokemonSelection(id, variation)}
 						/>

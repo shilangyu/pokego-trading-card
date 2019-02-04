@@ -52,7 +52,7 @@ class Pokefield extends React.Component {
 	}
 
 	render() {
-		const { classes, name } = this.props
+		const { classes, name, hasShiny } = this.props
 
 		return (
 			this.state.visible && (
@@ -68,9 +68,11 @@ class Pokefield extends React.Component {
 								<em>None</em>
 							</MenuItem>
 							<MenuItem value={'normal'}>Normal</MenuItem>
-							<MenuItem value={'shiny'}>
-								<span className={classes.shiny}>Shiny</span>
-							</MenuItem>
+							{hasShiny && (
+								<MenuItem value={'shiny'}>
+									<span className={classes.shiny}>Shiny</span>
+								</MenuItem>
+							)}
 						</Select>
 					</FormControl>
 				</Grid>
