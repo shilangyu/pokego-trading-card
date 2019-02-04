@@ -12,7 +12,7 @@ self.__precacheManifest = [
     "url": "/pokego-trading-card/static/js/runtime~main.9e4c6ed0.js"
   },
   {
-    "revision": "c287ba3eb36667a6bd8e346b2b7a2f17",
+    "revision": "c46b5b851f0ca30e4e203110d39843da",
     "url": "/pokego-trading-card/index.html"
   }
 ];
