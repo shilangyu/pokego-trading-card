@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import SaveIcon from '@material-ui/icons/Save'
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp'
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
+import Toast from '../dumb/Toast.jsx'
 
 import { getState, loadTradingCardData } from '../../store'
 
@@ -17,14 +18,18 @@ const styles = theme => ({
 })
 
 class Pokemenu extends Component {
-	onSaveButtonClick(e) {
+	state = {
+		importError: false
+	}
+
+	onSaveButtonClick = e => {
 		const a = document.createElement('a')
 		a.href = document.querySelector('canvas').toDataURL('image/png')
 		a.download = 'Trading-Card.png'
 		a.click()
 	}
 
-	onExportButtonClick(e) {
+	onExportButtonClick = e => {
 		const { neededPokemons, offeredPokemons } = getState()
 		const exportData = { neededPokemons, offeredPokemons }
 
@@ -35,16 +40,24 @@ class Pokemenu extends Component {
 		a.click()
 	}
 
-	onImportButtonClick() {
+	onImportButtonClick = () => {
 		const input = document.createElement('input')
 		input.type = 'file'
 		input.onchange = ({ target: { files } }) => {
 			if (files.length !== 1 || !/.*\.json$/.test(files[0].name)) {
-				console.error('wrong file')
+				this.setState({ importError: true })
+				return
 			}
 			const reader = new FileReader()
 
-			reader.onload = ({ target: { result } }) => loadTradingCardData(JSON.parse(result))
+			reader.onload = ({ target: { result } }) => {
+				try {
+					loadTradingCardData(JSON.parse(result))
+				} catch {
+					this.setState({ importError: true })
+					return
+				}
+			}
 
 			reader.readAsText(files[0])
 		}
@@ -53,9 +66,13 @@ class Pokemenu extends Component {
 
 	render() {
 		const { classes } = this.props
+		const { importError } = this.state
 
 		return (
 			<>
+				{importError && (
+					<Toast variant="error">Could not import the trading card, incorrect file :(</Toast>
+				)}
 				<Button variant="contained" className={classes.button} onClick={this.onSaveButtonClick}>
 					<SaveIcon className={classes.leftIcon} />
 					Save
