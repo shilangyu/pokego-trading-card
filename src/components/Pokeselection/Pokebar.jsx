@@ -16,6 +16,7 @@ class Pokebar extends Component {
 				fullWidth
 				margin="normal"
 				variant="outlined"
+				id="searchBar"
 			/>
 		)
 	}

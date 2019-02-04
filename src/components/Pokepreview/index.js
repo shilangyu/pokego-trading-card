@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Stage, Layer } from 'react-konva'
 import Pokesection from './Pokesection.jsx'
-import Pokemenu from './Pokemenu.jsx'
 
 import pokemonList from '../../constants/pokemonData'
 import { getState, listen } from '../../store'
@@ -54,7 +53,6 @@ export default class extends Component {
 						/>
 					</Layer>
 				</Stage>
-				{neededSpriteUrls.length + offeredSpriteUrls.length !== 0 && <Pokemenu />}
 			</>
 		)
 	}
