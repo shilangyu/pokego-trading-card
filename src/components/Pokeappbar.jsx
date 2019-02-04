@@ -7,8 +7,8 @@ import Fab from '@material-ui/core/Fab'
 import SearchIcon from '@material-ui/icons/Search'
 import Toast from './dumb/Toast.jsx'
 import SaveIcon from '@material-ui/icons/Save'
-import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp'
-import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
+import VerticalAlignTop from '@material-ui/icons/VerticalAlignTop'
+import VerticalAlignBottom from '@material-ui/icons/VerticalAlignBottom'
 import Tooltip from '@material-ui/core/Tooltip'
 import Zoom from '@material-ui/core/Zoom'
 
@@ -105,12 +105,16 @@ class Pokeappbar extends React.Component {
 							<SaveIcon />
 						</Fab>
 						<div>
-							<IconButton color="inherit" onClick={this.onImportButtonClick}>
-								<KeyboardArrowDown />
-							</IconButton>
-							<IconButton color="inherit" onClick={this.onExportButtonClick}>
-								<KeyboardArrowUp />
-							</IconButton>
+							<Tooltip title="Import" placement="top" TransitionComponent={Zoom}>
+								<IconButton color="inherit" onClick={this.onImportButtonClick}>
+									<VerticalAlignBottom />
+								</IconButton>
+							</Tooltip>
+							<Tooltip title="Export" placement="top" TransitionComponent={Zoom}>
+								<IconButton color="inherit" onClick={this.onExportButtonClick}>
+									<VerticalAlignTop />
+								</IconButton>
+							</Tooltip>
 							<Tooltip title="Search" placement="top" TransitionComponent={Zoom}>
 								<IconButton color="inherit" onClick={this.onSearchButtonClick}>
 									<SearchIcon />
