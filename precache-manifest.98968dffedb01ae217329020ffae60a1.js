@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "063c62486ecc1cf6681a",
-    "url": "/pokego-trading-card/static/js/main.063c6248.chunk.js"
+    "revision": "6b413f57b5301d7ced94",
+    "url": "/pokego-trading-card/static/js/main.6b413f57.chunk.js"
   },
   {
     "revision": "5003ea93542cb7872b0c",
@@ -12,7 +12,7 @@ self.__precacheManifest = [
     "url": "/pokego-trading-card/static/js/runtime~main.9e4c6ed0.js"
   },
   {
-    "revision": "39d20190e50b888ef72d7e95f13dd459",
+    "revision": "bd86083376b64fb698c3dcc899258239",
     "url": "/pokego-trading-card/index.html"
   }
 ];
