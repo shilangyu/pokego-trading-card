@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
 
-import { updateSearchValue } from '../../store'
+import * as store from '../../store'
 
 class Pokebar extends Component {
-	onChange = e => updateSearchValue(e.target.value)
+	onChange = e => store.updateSearchValue(e.target.value)
 
 	hideKeyboard = e => e.keyCode === 13 && e.target.blur()
 

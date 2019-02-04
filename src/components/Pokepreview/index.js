@@ -3,7 +3,7 @@ import { Stage, Layer } from 'react-konva'
 import Pokesection from './Pokesection.jsx'
 
 import pokemonList from '../../constants/pokemonData'
-import { getState, listen } from '../../store'
+import * as store from '../../store'
 
 const config = {
 	sprite: {
@@ -14,17 +14,21 @@ const config = {
 
 export default class extends Component {
 	componentDidMount() {
-		listen(() => this.forceUpdate())
+		store.listen(() => this.forceUpdate())
 	}
 
 	render() {
-		const neededSpriteUrls = getState().neededPokemons.map(
-			({ id, variation }) => pokemonList.find(e => e.id === id).sprites[variation]
-		)
+		const neededSpriteUrls = store
+			.getState()
+			.neededPokemons.map(
+				({ id, variation }) => pokemonList.find(e => e.id === id).sprites[variation]
+			)
 
-		const offeredSpriteUrls = getState().offeredPokemons.map(
-			({ id, variation }) => pokemonList.find(e => e.id === id).sprites[variation]
-		)
+		const offeredSpriteUrls = store
+			.getState()
+			.offeredPokemons.map(
+				({ id, variation }) => pokemonList.find(e => e.id === id).sprites[variation]
+			)
 
 		const width1 = Math.min(config.sprite.perRow, neededSpriteUrls.length) * config.sprite.offset.x
 		const height1 =

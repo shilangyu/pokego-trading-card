@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Grid from '@material-ui/core/Grid'
 
-import { listen } from '../../store'
+import * as store from '../../store'
 
 const styles = theme => ({
 	formControl: {
@@ -36,7 +36,7 @@ class Pokefield extends React.Component {
 		this.setState({
 			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
 		})
-		listen(state => {
+		store.listen(state => {
 			const searched = this.props.name.includes(state.searchValue.toLowerCase())
 			if (searched !== this.state.visible) this.setState({ visible: searched })
 

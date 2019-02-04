@@ -12,7 +12,7 @@ import VerticalAlignBottom from '@material-ui/icons/VerticalAlignBottom'
 import Tooltip from '@material-ui/core/Tooltip'
 import Zoom from '@material-ui/core/Zoom'
 
-import { getState, loadTradingCardData } from '../store'
+import * as store from '../store'
 
 const styles = theme => ({
 	appBar: {
@@ -48,7 +48,7 @@ class Pokeappbar extends React.Component {
 	}
 
 	onExportButtonClick = e => {
-		const { neededPokemons, offeredPokemons } = getState()
+		const { neededPokemons, offeredPokemons } = store.getState()
 		const exportData = { neededPokemons, offeredPokemons }
 
 		const a = document.createElement('a')
@@ -70,7 +70,7 @@ class Pokeappbar extends React.Component {
 
 			reader.onload = ({ target: { result } }) => {
 				try {
-					loadTradingCardData(JSON.parse(result))
+					store.loadTradingCardData(JSON.parse(result))
 				} catch {
 					this.setState({ importError: true })
 					return
