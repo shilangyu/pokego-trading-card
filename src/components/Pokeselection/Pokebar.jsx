@@ -4,9 +4,9 @@ import TextField from '@material-ui/core/TextField'
 import { updateSearchValue } from '../../store'
 
 class Pokebar extends Component {
-	onChange = event => {
-		updateSearchValue(event.target.value)
-	}
+	onChange = e => updateSearchValue(e.target.value)
+
+	hideKeyboard = e => e.keyCode === 13 && e.target.blur()
 
 	render() {
 		return (
@@ -17,6 +17,7 @@ class Pokebar extends Component {
 				margin="normal"
 				variant="outlined"
 				id="searchBar"
+				onKeyUp={this.hideKeyboard}
 			/>
 		)
 	}
