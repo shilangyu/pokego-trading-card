@@ -39,14 +39,14 @@ export default class extends Component {
 					<Layer>
 						<Pokesection
 							spriteUrls={neededSpriteUrls}
-							text="Pokemons I'm looking for"
+							text="Pokémons I'm looking for"
 							config={config}
 							yOffset={0}
 							gradientColors={['#113977', '#4689f2']}
 						/>
 						<Pokesection
 							spriteUrls={offeredSpriteUrls}
-							text="Pokemons I can give"
+							text="Pokémons I can give"
 							config={config}
 							yOffset={height1}
 							gradientColors={['#166021', '#46f15f']}

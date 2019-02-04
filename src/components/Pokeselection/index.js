@@ -22,7 +22,7 @@ export default class extends Component {
 				</Grid>
 				<Grid item xs={6}>
 					<Pokelist
-						title="Pokemons you are looking for"
+						title="Pokémons you are looking for"
 						dataPrefix="needed"
 						rootStyles={styles.pokelist}
 						addPokemonSelection={addPokemonSelectionFunc('needed')}
@@ -30,7 +30,7 @@ export default class extends Component {
 				</Grid>
 				<Grid item xs={6}>
 					<Pokelist
-						title="Pokemons you can give"
+						title="Pokémons you can give"
 						dataPrefix="offered"
 						rootStyles={styles.pokelist}
 						addPokemonSelection={addPokemonSelectionFunc('offered')}
