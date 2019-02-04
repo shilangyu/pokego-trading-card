@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/pokego-trading-card/precache-manifest.44b35206f36cad42305cee4f6066e7e7.js"
+  "/pokego-trading-card/precache-manifest.9ec9946e64d3d31ee94dbc3a08739afb.js"
 );
 
 workbox.clientsClaim();
