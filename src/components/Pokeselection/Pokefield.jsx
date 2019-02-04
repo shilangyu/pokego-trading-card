@@ -36,9 +36,13 @@ class Pokefield extends React.Component {
 		this.setState({
 			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
 		})
-		listen(({ searchValue }) => {
-			const searched = this.props.name.includes(searchValue.toLowerCase())
+		listen(state => {
+			const searched = this.props.name.includes(state.searchValue.toLowerCase())
 			if (searched !== this.state.visible) this.setState({ visible: searched })
+
+			const selected = state[this.props.dataPrefix + 'Pokemons'].find(e => e.id === this.props.id)
+			if (selected) this.setState({ value: selected.variation })
+			else if (!selected && this.state.value !== '') this.setState({ value: '' })
 		})
 	}
 

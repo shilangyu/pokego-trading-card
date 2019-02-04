@@ -8,7 +8,7 @@ import pokemonList from '../../constants/pokemonData'
 
 class Pokelist extends Component {
 	render() {
-		const { addPokemonSelection, rootStyles, title } = this.props
+		const { addPokemonSelection, rootStyles, title, dataPrefix } = this.props
 
 		return (
 			<Paper style={rootStyles}>
@@ -23,6 +23,7 @@ class Pokelist extends Component {
 							key={id}
 							name={name}
 							id={id}
+							dataPrefix={dataPrefix}
 							addPokemonSelection={variation => addPokemonSelection(id, variation)}
 						/>
 					))}
