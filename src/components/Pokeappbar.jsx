@@ -20,8 +20,7 @@ const styles = theme => ({
 		bottom: 0
 	},
 	toolbar: {
-		alignItems: 'center',
-		justifyContent: 'space-between'
+		justifyContent: 'flex-end'
 	},
 	fabButton: {
 		position: 'absolute',
