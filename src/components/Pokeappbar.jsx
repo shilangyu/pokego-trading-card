@@ -37,7 +37,15 @@ const styles = theme => ({
 
 class Pokeappbar extends React.Component {
 	state = {
+		hide: true,
 		importError: false
+	}
+
+	componentDidMount = () => {
+		store.listen(state => {
+			const hide = state.neededPokemons.length + state.offeredPokemons.length === 0
+			if (this.state.hide !== hide) this.setState({ hide })
+		})
 	}
 
 	onSaveButtonClick = e => {
@@ -86,7 +94,7 @@ class Pokeappbar extends React.Component {
 
 	render() {
 		const { classes, children } = this.props
-		const { importError } = this.state
+		const { importError, hide } = this.state
 
 		return (
 			<>
@@ -101,6 +109,7 @@ class Pokeappbar extends React.Component {
 							aria-label="Add"
 							className={classes.fabButton}
 							onClick={this.onSaveButtonClick}
+							disabled={hide}
 						>
 							<SaveIcon />
 						</Fab>
@@ -111,7 +120,12 @@ class Pokeappbar extends React.Component {
 								</IconButton>
 							</Tooltip>
 							<Tooltip title="Export" placement="top" TransitionComponent={Zoom}>
-								<IconButton color="inherit" onClick={this.onExportButtonClick}>
+								<IconButton
+									color="inherit"
+									component={'div'}
+									onClick={this.onExportButtonClick}
+									disabled={hide}
+								>
 									<VerticalAlignTop />
 								</IconButton>
 							</Tooltip>
