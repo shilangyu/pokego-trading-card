@@ -7,8 +7,15 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Grid from '@material-ui/core/Grid'
+import Checkbox from '@material-ui/core/Checkbox'
+import Star from '@material-ui/icons/Star'
+import StarBorder from '@material-ui/icons/StarBorder'
+import MuiDownshift from 'mui-downshift'
 
 import * as store from '../../store'
+import pokemonList from '../../constants/pokemonData'
+
+const items = pokemonList.map(e => ({label: e.name, value: e.id}))
 
 const styles = theme => ({
 	formControl: {
@@ -21,15 +28,22 @@ const styles = theme => ({
 		marginTop: theme.spacing.unit * 2
 	},
 	shiny: {
-		color: '#e5f442'
-	}
+		color: '#e9ff00',
+		'&$checked': {
+			color: '#e9ff00'
+		}
+	},
+	checked: {}
 })
 
 class Pokefield extends React.Component {
 	state = {
+		gender: '',
 		labelWidth: 0,
 		value: '',
-		visible: true
+		visible: true,
+		shiny: false,
+		filteredItems: []
 	}
 
 	componentDidMount() {
@@ -46,35 +60,68 @@ class Pokefield extends React.Component {
 		})
 	}
 
-	handleChange = ({ target: { value } }) => {
-		this.props.addPokemonSelection(value)
-		this.setState({ value })
+	onPokemonSearch = changes => {
+    if (typeof changes.inputValue === 'string') {
+      const filteredItems = items.filter(item => item.label.toLowerCase().includes(changes.inputValue.toLowerCase()));
+      this.setState({ filteredItems });
+    }
+    if (this.input && this.props.blurOnSelect) {
+      this.input.blur();
+    }
+  };
+
+	onGenderChange = ({ target: { value } }) => {
+		this.setState({ gender: value })
+	}
+
+	onShinyChange = ({ target: { checked } }) => {
+		this.setState({ shiny: checked })
 	}
 
 	render() {
 		const { classes, name, hasShiny } = this.props
+		const { gender, visible, labelWidth, shiny, filteredItems } = this.state
 
 		return (
-			this.state.visible && (
-				<Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-					<FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel ref={ref => (this.InputLabelRef = ref)}>{name}</InputLabel>
-						<Select
-							value={this.state.value}
-							onChange={this.handleChange}
-							input={<OutlinedInput labelWidth={this.state.labelWidth} />}
-						>
-							<MenuItem value="">
-								<em>None</em>
-							</MenuItem>
-							<MenuItem value={'normal'}>Normal</MenuItem>
-							{hasShiny && (
-								<MenuItem value={'shiny'}>
-									<span className={classes.shiny}>Shiny</span>
+			visible && (
+				<Grid container>
+					<Grid item xs={7}>
+						<MuiDownshift
+							items={filteredItems}
+							onStateChange={this.onPokemonSearch}
+							inputRef={node => {
+								this.input = node
+							}}
+						/>
+					</Grid>
+					<Grid item xs={3}>
+						<FormControl variant="outlined" className={classes.formControl}>
+							<InputLabel ref={ref => (this.InputLabelRef = ref)}>gender</InputLabel>
+							<Select
+								value={gender}
+								onChange={this.onGenderChange}
+								input={<OutlinedInput labelWidth={labelWidth} />}
+							>
+								<MenuItem value={''}>
+									<em>Whatever</em>
 								</MenuItem>
-							)}
-						</Select>
-					</FormControl>
+								<MenuItem value={'male'}>Male</MenuItem>
+								{hasShiny && <MenuItem value={'female'}>Female</MenuItem>}
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item xs={2}>
+						<Checkbox
+							icon={<StarBorder />}
+							checkedIcon={<Star />}
+							classes={{
+								root: classes.shiny,
+								checked: classes.checked
+							}}
+							onChange={this.onShinyChange}
+							checked={shiny}
+						/>
+					</Grid>
 				</Grid>
 			)
 		)
