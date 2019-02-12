@@ -20,7 +20,7 @@ export default class extends Component {
 				<Grid item xs={12}>
 					<Pokebar /> <br />
 				</Grid>
-				<Grid item xs={6}>
+				<Grid item row>
 					<Pokelist
 						title="Pokémons you are looking for"
 						dataPrefix="needed"
@@ -28,7 +28,7 @@ export default class extends Component {
 						addPokemonSelection={store.addPokemonSelectionFunc('needed')}
 					/>
 				</Grid>
-				<Grid item xs={6}>
+				<Grid item row>
 					<Pokelist
 						title="Pokémons you can give"
 						dataPrefix="offered"
