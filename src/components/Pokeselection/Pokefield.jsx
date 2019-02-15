@@ -15,7 +15,7 @@ import MuiDownshift from 'mui-downshift'
 import * as store from '../../store'
 import pokemonList from '../../constants/pokemonData'
 
-const items = pokemonList.map(e => ({label: e.name, value: e.id}))
+const items = pokemonList.map(e => ({ label: e.name, id: e.id }))
 
 const styles = theme => ({
 	formControl: {
@@ -38,11 +38,10 @@ const styles = theme => ({
 
 class Pokefield extends React.Component {
 	state = {
+		pokemonId: null,
 		gender: '',
-		labelWidth: 0,
-		value: '',
-		visible: true,
 		shiny: false,
+		labelWidth: 0,
 		filteredItems: []
 	}
 
@@ -50,80 +49,91 @@ class Pokefield extends React.Component {
 		this.setState({
 			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
 		})
-		store.listen(state => {
-			const searched = this.props.name.includes(state.searchValue.toLowerCase())
-			if (searched !== this.state.visible) this.setState({ visible: searched })
+	}
 
-			const selected = state[this.props.dataPrefix + 'Pokemons'].find(e => e.id === this.props.id)
-			if (selected) this.setState({ value: selected.variation })
-			else if (!selected && this.state.value !== '') this.setState({ value: '' })
-		})
+	sendChanges = () => {
+		const { gender, shiny, pokemonId } = this.state
+
+		this.props.addPokemonSelection(pokemonId, gender, shiny)
+	}
+
+	removeChanges = id => {
+		this.props.removePokemonSelection(id)
 	}
 
 	onPokemonSearch = changes => {
-    if (typeof changes.inputValue === 'string') {
-      const filteredItems = items.filter(item => item.label.toLowerCase().includes(changes.inputValue.toLowerCase()));
-      this.setState({ filteredItems });
-    }
-    if (this.input && this.props.blurOnSelect) {
-      this.input.blur();
-    }
-  };
+		if (typeof changes.inputValue === 'string') {
+			const filteredItems = items.filter(item =>
+				item.label.toLowerCase().includes(changes.inputValue.toLowerCase())
+			)
+			this.setState({ filteredItems })
+		}
+		if (this.input && this.props.blurOnSelect) {
+			this.input.blur()
+		}
+		if (changes.selectedItem) {
+			this.setState({ pokemonId: changes.selectedItem.id }, () => this.sendChanges())
+		}
+		if (!changes.selectedItem && this.state.pokemonId) {
+			const toRemove = this.state.pokemonId
+			this.setState({ pokemonId: null, gender: '', shiny: false }, () =>
+				this.removeChanges(toRemove)
+			)
+		}
+	}
 
 	onGenderChange = ({ target: { value } }) => {
-		this.setState({ gender: value })
+		this.setState({ gender: value }, () => this.sendChanges())
 	}
 
 	onShinyChange = ({ target: { checked } }) => {
-		this.setState({ shiny: checked })
+		this.setState({ shiny: checked }, () => this.sendChanges())
 	}
 
 	render() {
-		const { classes, name, hasShiny } = this.props
-		const { gender, visible, labelWidth, shiny, filteredItems } = this.state
+		const { classes } = this.props
+		const { gender, labelWidth, shiny, filteredItems, pokemonId } = this.state
 
 		return (
-			visible && (
-				<Grid container>
-					<Grid item xs={7}>
-						<MuiDownshift
-							items={filteredItems}
-							onStateChange={this.onPokemonSearch}
-							inputRef={node => {
-								this.input = node
-							}}
-						/>
-					</Grid>
-					<Grid item xs={3}>
-						<FormControl variant="outlined" className={classes.formControl}>
-							<InputLabel ref={ref => (this.InputLabelRef = ref)}>gender</InputLabel>
-							<Select
-								value={gender}
-								onChange={this.onGenderChange}
-								input={<OutlinedInput labelWidth={labelWidth} />}
-							>
-								<MenuItem value={''}>
-									<em>Whatever</em>
-								</MenuItem>
-								<MenuItem value={'male'}>Male</MenuItem>
-								{hasShiny && <MenuItem value={'female'}>Female</MenuItem>}
-							</Select>
-						</FormControl>
-					</Grid>
-					<Grid item xs={2}>
-						<Checkbox
-							icon={<StarBorder />}
-							checkedIcon={<Star />}
-							classes={{
-								root: classes.shiny,
-								checked: classes.checked
-							}}
-							onChange={this.onShinyChange}
-							checked={shiny}
-						/>
-					</Grid>
+			<Grid container>
+				<Grid item xs={7}>
+					<MuiDownshift
+						items={filteredItems}
+						onStateChange={this.onPokemonSearch}
+						inputRef={node => {
+							this.input = node
+						}}
+					/>
 				</Grid>
-			)
+				<Grid item xs={3}>
+					<FormControl variant="outlined" className={classes.formControl}>
+						<InputLabel ref={ref => (this.InputLabelRef = ref)}>gender</InputLabel>
+						<Select
+							value={gender}
+							onChange={this.onGenderChange}
+							input={<OutlinedInput labelWidth={labelWidth} />}
+						>
+							<MenuItem value={''}>
+								<em>Whatever</em>
+							</MenuItem>
+							<MenuItem value={'male'}>Male</MenuItem>
+							<MenuItem value={'female'}>Female</MenuItem>
+						</Select>
+					</FormControl>
+				</Grid>
+				<Grid item xs={2}>
+					<Checkbox
+						icon={<StarBorder />}
+						checkedIcon={<Star />}
+						classes={{
+							root: classes.shiny,
+							checked: classes.checked
+						}}
+						onChange={this.onShinyChange}
+						checked={shiny}
+					/>
+				</Grid>
+			</Grid>
 		)
 	}
 }

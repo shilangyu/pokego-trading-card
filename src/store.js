@@ -1,5 +1,4 @@
 const store = {
-	searchValue: '',
 	neededPokemons: [],
 	offeredPokemons: []
 }
@@ -11,30 +10,35 @@ const notify = action => (...args) => {
 export const getState = () => JSON.parse(JSON.stringify(store))
 export const listen = func => listeners.push(func)
 
-export const updateSearchValue = notify(newVal => (store.searchValue = newVal))
-
 export const addPokemonSelectionFunc = prefix =>
-	notify((id, variation) => {
+	notify((id, gender, isShiny) => {
 		const found = store[prefix + 'Pokemons'].find(e => id === e.id)
 
-		if (!found && variation !== '')
+		if (!found)
 			store[prefix + 'Pokemons'] = [
 				...store[prefix + 'Pokemons'],
 				{
 					id,
-					variation
+					gender,
+					isShiny
 				}
 			]
-		else if (variation === '')
-			store[prefix + 'Pokemons'] = [...store[prefix + 'Pokemons'].filter(e => e.id !== id)]
-		else if (variation !== found.variation)
+		else
 			store[prefix + 'Pokemons'] = [
 				...store[prefix + 'Pokemons'].filter(e => e.id !== id),
 				{
 					id,
-					variation
+					gender,
+					isShiny
 				}
 			]
+	})
+
+export const removePokemonSelectionFunc = prefix =>
+	notify(id => {
+		const found = store[prefix + 'Pokemons'].find(e => id === e.id)
+
+		if (found) store[prefix + 'Pokemons'] = store[prefix + 'Pokemons'].filter(e => e !== found)
 	})
 
 export const loadTradingCardData = notify(({ neededPokemons, offeredPokemons }) => {

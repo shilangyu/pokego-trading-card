@@ -21,13 +21,13 @@ export default class extends Component {
 		const neededSpriteUrls = store
 			.getState()
 			.neededPokemons.map(
-				({ id, variation }) => pokemonList.find(e => e.id === id).sprites[variation]
+				({ id, isShiny }) => pokemonList.find(e => e.id === id).sprites[isShiny ? 'shiny' : 'normal']
 			)
 
 		const offeredSpriteUrls = store
 			.getState()
 			.offeredPokemons.map(
-				({ id, variation }) => pokemonList.find(e => e.id === id).sprites[variation]
+				({ id, isShiny }) => pokemonList.find(e => e.id === id).sprites[isShiny ? 'shiny' : 'normal']
 			)
 
 		const width1 = Math.min(config.sprite.perRow, neededSpriteUrls.length) * config.sprite.offset.x
