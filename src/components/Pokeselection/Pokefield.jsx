@@ -12,7 +12,6 @@ import Star from '@material-ui/icons/Star'
 import StarBorder from '@material-ui/icons/StarBorder'
 import MuiDownshift from 'mui-downshift'
 
-import * as store from '../../store'
 import pokemonList from '../../constants/pokemonData'
 
 const items = pokemonList.map(e => ({ label: e.name, id: e.id }))
@@ -92,7 +91,7 @@ class Pokefield extends React.Component {
 
 	render() {
 		const { classes } = this.props
-		const { gender, labelWidth, shiny, filteredItems, pokemonId } = this.state
+		const { gender, labelWidth, shiny, filteredItems } = this.state
 
 		return (
 			<Grid container>
