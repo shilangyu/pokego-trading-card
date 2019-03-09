@@ -20,8 +20,7 @@ const styles = theme => ({
 	gender: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		margin: theme.spacing.unit,
-		minWidth: 120
+		margin: theme.spacing.unit
 	},
 	downshift: {
 		margin: theme.spacing.unit
