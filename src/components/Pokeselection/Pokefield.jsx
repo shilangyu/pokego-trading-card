@@ -17,11 +17,14 @@ import pokemonList from '../../constants/pokemonData'
 const items = pokemonList.map(e => ({ label: e.name, id: e.id }))
 
 const styles = theme => ({
-	formControl: {
+	gender: {
 		display: 'flex',
 		flexWrap: 'wrap',
 		margin: theme.spacing.unit,
 		minWidth: 120
+	},
+	downshift: {
+		margin: theme.spacing.unit
 	},
 	selectEmpty: {
 		marginTop: theme.spacing.unit * 2
@@ -30,7 +33,10 @@ const styles = theme => ({
 		color: '#e9ff00',
 		'&$checked': {
 			color: '#e9ff00'
-		}
+		},
+		position: 'relative',
+		top: '50%',
+		transform: 'translateY(-50%)'
 	},
 	checked: {}
 })
@@ -38,22 +44,14 @@ const styles = theme => ({
 class Pokefield extends React.Component {
 	state = {
 		pokemonId: null,
-		gender: '',
-		shiny: false,
 		labelWidth: 0,
-		filteredItems: []
+		filteredItems: items
 	}
 
 	componentDidMount() {
 		this.setState({
 			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
 		})
-	}
-
-	sendChanges = () => {
-		const { gender, shiny, pokemonId } = this.state
-
-		this.props.addPokemonSelection(pokemonId, gender, shiny)
 	}
 
 	removeChanges = id => {
@@ -71,44 +69,52 @@ class Pokefield extends React.Component {
 			this.input.blur()
 		}
 		if (changes.selectedItem) {
-			this.setState({ pokemonId: changes.selectedItem.id }, () => this.sendChanges())
+			this.props.addPokemonSelection(changes.selectedItem.id, '', false)
 		}
 		if (!changes.selectedItem && this.state.pokemonId) {
 			const toRemove = this.state.pokemonId
-			this.setState({ pokemonId: null, gender: '', shiny: false }, () =>
-				this.removeChanges(toRemove)
-			)
+			this.removeChanges(toRemove)
 		}
 	}
 
 	onGenderChange = ({ target: { value } }) => {
-		this.setState({ gender: value }, () => this.sendChanges())
+		this.props.addPokemonSelection(this.props.id, value, undefined)
 	}
 
 	onShinyChange = ({ target: { checked } }) => {
-		this.setState({ shiny: checked }, () => this.sendChanges())
+		this.props.addPokemonSelection(this.props.id, undefined, checked)
 	}
 
 	render() {
-		const { classes } = this.props
-		const { gender, labelWidth, shiny, filteredItems, pokemonId } = this.state
+		const { classes, isShiny, id, gender } = this.props
+		const { labelWidth, filteredItems } = this.state
 
 		return (
 			<Grid container>
 				<Grid item xs={7}>
 					<MuiDownshift
+						getInputProps={() => ({
+							label: 'Select a pokemon',
+							required: true,
+							value: id ? items.find(e => e.id === id).label : ''
+						})}
+						getRootProps={() => ({
+							className: classes.downshift
+						})}
 						items={filteredItems}
 						onStateChange={this.onPokemonSearch}
 						inputRef={node => {
 							this.input = node
 						}}
+						variant="outlined"
+						showEmpty
 					/>
 				</Grid>
 				<Grid item xs={3}>
-					<FormControl variant="outlined" className={classes.formControl}>
+					<FormControl variant="outlined" className={classes.gender}>
 						<InputLabel ref={ref => (this.InputLabelRef = ref)}>gender</InputLabel>
 						<Select
-							disabled={pokemonId === null}
+							disabled={id === null}
 							value={gender}
 							onChange={this.onGenderChange}
 							input={<OutlinedInput labelWidth={labelWidth} />}
@@ -123,7 +129,7 @@ class Pokefield extends React.Component {
 				</Grid>
 				<Grid item xs={2}>
 					<Checkbox
-						disabled={pokemonId === null}
+						disabled={id === null}
 						icon={<StarBorder />}
 						checkedIcon={<Star />}
 						classes={{
@@ -131,7 +137,7 @@ class Pokefield extends React.Component {
 							checked: classes.checked
 						}}
 						onChange={this.onShinyChange}
-						checked={shiny}
+						checked={isShiny}
 					/>
 				</Grid>
 			</Grid>

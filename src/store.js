@@ -28,8 +28,8 @@ export const addPokemonSelectionFunc = prefix =>
 				...store[prefix + 'Pokemons'].filter(e => e.id !== id),
 				{
 					id,
-					gender,
-					isShiny
+					gender: gender || found.gender,
+					isShiny: isShiny || found.isShiny
 				}
 			]
 	})

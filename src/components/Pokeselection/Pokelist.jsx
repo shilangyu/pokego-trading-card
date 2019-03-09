@@ -4,15 +4,21 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
+import * as store from '../../store'
+
 class Pokelist extends Component {
+	state = {
+		pokemons: []
+	}
+
+	componentDidMount() {
+		store.listen(state => this.setState({ pokemons: state[this.props.dataPrefix + 'Pokemons'] }))
+	}
+
 	render() {
-		const {
-			addPokemonSelection,
-			removePokemonSelection,
-			rootStyles,
-			title,
-			dataPrefix
-		} = this.props
+		const { addPokemonSelection, removePokemonSelection, rootStyles, title } = this.props
+
+		const pokemonsPlusOne = [...this.state.pokemons, { isShiny: false, gender: '', id: null }]
 
 		return (
 			<Paper style={rootStyles}>
@@ -23,11 +29,14 @@ class Pokelist extends Component {
 						</Typography>
 					</Grid>
 					<Grid item xs={12}>
-						<Pokefield
-							dataPrefix={dataPrefix}
-							addPokemonSelection={addPokemonSelection}
-							removePokemonSelection={removePokemonSelection}
-						/>
+						{pokemonsPlusOne.map(poke => (
+							<Pokefield
+								key={poke.id}
+								addPokemonSelection={addPokemonSelection}
+								removePokemonSelection={removePokemonSelection}
+								{...poke}
+							/>
+						))}
 					</Grid>
 				</Grid>
 			</Paper>
