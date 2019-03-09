@@ -91,7 +91,7 @@ class Pokefield extends React.Component {
 
 	render() {
 		const { classes } = this.props
-		const { gender, labelWidth, shiny, filteredItems } = this.state
+		const { gender, labelWidth, shiny, filteredItems, pokemonId } = this.state
 
 		return (
 			<Grid container>
@@ -108,6 +108,7 @@ class Pokefield extends React.Component {
 					<FormControl variant="outlined" className={classes.formControl}>
 						<InputLabel ref={ref => (this.InputLabelRef = ref)}>gender</InputLabel>
 						<Select
+							disabled={pokemonId === null}
 							value={gender}
 							onChange={this.onGenderChange}
 							input={<OutlinedInput labelWidth={labelWidth} />}
@@ -122,6 +123,7 @@ class Pokefield extends React.Component {
 				</Grid>
 				<Grid item xs={2}>
 					<Checkbox
+						disabled={pokemonId === null}
 						icon={<StarBorder />}
 						checkedIcon={<Star />}
 						classes={{
