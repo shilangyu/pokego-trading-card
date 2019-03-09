@@ -109,7 +109,7 @@ class Pokefield extends React.Component {
 						showEmpty
 					/>
 				</Grid>
-				<Grid item xs={3}>
+				<Grid item xs={4}>
 					<FormControl variant="outlined" className={classes.gender}>
 						<InputLabel ref={ref => (this.InputLabelRef = ref)}>gender</InputLabel>
 						<Select
@@ -126,7 +126,7 @@ class Pokefield extends React.Component {
 						</Select>
 					</FormControl>
 				</Grid>
-				<Grid item xs={2}>
+				<Grid item xs={1}>
 					<Checkbox
 						disabled={id === null}
 						icon={<StarBorder />}
