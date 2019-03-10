@@ -92,10 +92,10 @@ class Pokefield extends React.Component {
 			<Grid container>
 				<Grid item xs={7}>
 					<MuiDownshift
+						defaultSelectedItem={id ? items.find(e => e.id === id) : null}
 						getInputProps={() => ({
 							label: 'Select a pokemon',
-							required: true,
-							value: id ? items.find(e => e.id === id).label : ''
+							required: true
 						})}
 						getRootProps={() => ({
 							className: classes.downshift
