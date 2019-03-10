@@ -48,8 +48,12 @@ class Pokefield extends React.Component {
 	}
 
 	componentDidMount() {
+		const find = items.find(e => e.id === this.props.id)
+		const initialLabel = find ? find.label.toLowerCase() : ''
+		const initialFilter = items.filter(item => item.label.toLowerCase().includes(initialLabel))
 		this.setState({
-			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
+			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+			filteredItems: initialFilter
 		})
 	}
 
