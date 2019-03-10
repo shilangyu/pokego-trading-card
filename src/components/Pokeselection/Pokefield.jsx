@@ -42,7 +42,6 @@ const styles = theme => ({
 
 class Pokefield extends React.Component {
 	state = {
-		pokemonId: null,
 		labelWidth: 0,
 		filteredItems: items
 	}
