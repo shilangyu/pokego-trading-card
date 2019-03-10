@@ -68,7 +68,7 @@ class Pokefield extends React.Component {
 		if (changes.selectedItem) {
 			this.props.addPokemonSelection(this.props.storeKey, changes.selectedItem.id, '', false)
 		}
-		if (!changes.selectedItem && this.state.pokemonId) {
+		if (changes.type === '__autocomplete_unknown__' && changes.selectedItem === null) {
 			this.removeChanges()
 		}
 	}
