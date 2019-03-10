@@ -7,76 +7,139 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Grid from '@material-ui/core/Grid'
+import Checkbox from '@material-ui/core/Checkbox'
+import Star from '@material-ui/icons/Star'
+import StarBorder from '@material-ui/icons/StarBorder'
+import MuiDownshift from 'mui-downshift'
 
-import * as store from '../../store'
+import pokemonList from '../../constants/pokemonData'
+
+const items = pokemonList.map(e => ({ label: e.name, id: e.id }))
 
 const styles = theme => ({
-	formControl: {
+	gender: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		margin: theme.spacing.unit,
-		minWidth: 120
+		margin: theme.spacing.unit
+	},
+	downshift: {
+		margin: theme.spacing.unit
 	},
 	selectEmpty: {
 		marginTop: theme.spacing.unit * 2
 	},
 	shiny: {
-		color: '#e5f442'
-	}
+		color: '#e9ff00',
+		'&$checked': {
+			color: '#e9ff00'
+		},
+		position: 'relative',
+		top: '50%',
+		transform: 'translateY(-50%)'
+	},
+	checked: {}
 })
 
 class Pokefield extends React.Component {
 	state = {
 		labelWidth: 0,
-		value: '',
-		visible: true
+		filteredItems: items
 	}
 
 	componentDidMount() {
+		const find = items.find(e => e.id === this.props.id)
+		const initialLabel = find ? find.label.toLowerCase() : ''
+		const initialFilter = items.filter(item => item.label.toLowerCase().includes(initialLabel))
 		this.setState({
-			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-		})
-		store.listen(state => {
-			const searched = this.props.name.includes(state.searchValue.toLowerCase())
-			if (searched !== this.state.visible) this.setState({ visible: searched })
-
-			const selected = state[this.props.dataPrefix + 'Pokemons'].find(e => e.id === this.props.id)
-			if (selected) this.setState({ value: selected.variation })
-			else if (!selected && this.state.value !== '') this.setState({ value: '' })
+			labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+			filteredItems: initialFilter
 		})
 	}
 
-	handleChange = ({ target: { value } }) => {
-		this.props.addPokemonSelection(value)
-		this.setState({ value })
+	removeChanges = () => this.props.removePokemonSelection(this.props.storeKey)
+
+	onPokemonSearch = changes => {
+		if (typeof changes.inputValue === 'string') {
+			const filteredItems = items.filter(item =>
+				item.label.toLowerCase().includes(changes.inputValue.toLowerCase())
+			)
+			this.setState({ filteredItems })
+		}
+		if (this.input && this.props.blurOnSelect) {
+			this.input.blur()
+		}
+		if (changes.selectedItem) {
+			this.props.addPokemonSelection(this.props.storeKey, changes.selectedItem.id, '', false)
+		}
+		if (changes.type === '__autocomplete_unknown__' && changes.selectedItem === null) {
+			this.removeChanges()
+		}
+	}
+
+	onGenderChange = ({ target: { value } }) => {
+		this.props.addPokemonSelection(this.props.storeKey, this.props.id, value, undefined)
+	}
+
+	onShinyChange = ({ target: { checked } }) => {
+		this.props.addPokemonSelection(this.props.storeKey, this.props.id, undefined, checked)
 	}
 
 	render() {
-		const { classes, name, hasShiny } = this.props
+		const { classes, isShiny, id, gender } = this.props
+		const { labelWidth, filteredItems } = this.state
 
 		return (
-			this.state.visible && (
-				<Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-					<FormControl variant="outlined" className={classes.formControl}>
-						<InputLabel ref={ref => (this.InputLabelRef = ref)}>{name}</InputLabel>
+			<Grid container>
+				<Grid item xs={7}>
+					<MuiDownshift
+						defaultSelectedItem={id ? items.find(e => e.id === id) : null}
+						getInputProps={() => ({
+							label: 'Select a pokemon',
+							required: true
+						})}
+						getRootProps={() => ({
+							className: classes.downshift
+						})}
+						items={filteredItems}
+						onStateChange={this.onPokemonSearch}
+						inputRef={node => {
+							this.input = node
+						}}
+						variant="outlined"
+						showEmpty
+					/>
+				</Grid>
+				<Grid item xs={4}>
+					<FormControl variant="outlined" className={classes.gender}>
+						<InputLabel ref={ref => (this.InputLabelRef = ref)}>gender</InputLabel>
 						<Select
-							value={this.state.value}
-							onChange={this.handleChange}
-							input={<OutlinedInput labelWidth={this.state.labelWidth} />}
+							disabled={id === null}
+							value={gender}
+							onChange={this.onGenderChange}
+							input={<OutlinedInput labelWidth={labelWidth} />}
 						>
-							<MenuItem value="">
-								<em>None</em>
+							<MenuItem value={''}>
+								<em>Whatever</em>
 							</MenuItem>
-							<MenuItem value={'normal'}>Normal</MenuItem>
-							{hasShiny && (
-								<MenuItem value={'shiny'}>
-									<span className={classes.shiny}>Shiny</span>
-								</MenuItem>
-							)}
+							<MenuItem value={'male'}>Male</MenuItem>
+							<MenuItem value={'female'}>Female</MenuItem>
 						</Select>
 					</FormControl>
 				</Grid>
-			)
+				<Grid item xs={1}>
+					<Checkbox
+						disabled={id === null}
+						icon={<StarBorder />}
+						checkedIcon={<Star />}
+						classes={{
+							root: classes.shiny,
+							checked: classes.checked
+						}}
+						onChange={this.onShinyChange}
+						checked={isShiny}
+					/>
+				</Grid>
+			</Grid>
 		)
 	}
 }

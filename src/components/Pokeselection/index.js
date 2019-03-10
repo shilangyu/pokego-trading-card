@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Pokelist from './Pokelist.jsx'
-import Pokebar from './Pokebar.jsx'
 import Grid from '@material-ui/core/Grid'
 
 import * as store from '../../store'
@@ -18,22 +17,21 @@ export default class extends Component {
 		return (
 			<Grid container spacing={24}>
 				<Grid item xs={12}>
-					<Pokebar /> <br />
-				</Grid>
-				<Grid item row>
 					<Pokelist
 						title="Pokémons you are looking for"
 						dataPrefix="needed"
 						rootStyles={styles.pokelist}
 						addPokemonSelection={store.addPokemonSelectionFunc('needed')}
+						removePokemonSelection={store.removePokemonSelectionFunc('needed')}
 					/>
 				</Grid>
-				<Grid item row>
+				<Grid item xs={12}>
 					<Pokelist
 						title="Pokémons you can give"
 						dataPrefix="offered"
 						rootStyles={styles.pokelist}
 						addPokemonSelection={store.addPokemonSelectionFunc('offered')}
+						removePokemonSelection={store.removePokemonSelectionFunc('offered')}
 					/>
 				</Grid>
 			</Grid>
