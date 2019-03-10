@@ -31,7 +31,7 @@ class Pokelist extends Component {
 					<Grid item xs={12}>
 						{pokemonsPlusOne.map((poke, i) => (
 							<Pokefield
-								key={poke.id}
+								key={i}
 								storeKey={i}
 								addPokemonSelection={addPokemonSelection}
 								removePokemonSelection={removePokemonSelection}
