@@ -53,9 +53,7 @@ class Pokefield extends React.Component {
 		})
 	}
 
-	removeChanges = id => {
-		this.props.removePokemonSelection(id)
-	}
+	removeChanges = () => this.props.removePokemonSelection(this.props.storeKey)
 
 	onPokemonSearch = changes => {
 		if (typeof changes.inputValue === 'string') {
@@ -68,20 +66,19 @@ class Pokefield extends React.Component {
 			this.input.blur()
 		}
 		if (changes.selectedItem) {
-			this.props.addPokemonSelection(changes.selectedItem.id, '', false)
+			this.props.addPokemonSelection(this.props.storeKey, changes.selectedItem.id, '', false)
 		}
 		if (!changes.selectedItem && this.state.pokemonId) {
-			const toRemove = this.state.pokemonId
-			this.removeChanges(toRemove)
+			this.removeChanges()
 		}
 	}
 
 	onGenderChange = ({ target: { value } }) => {
-		this.props.addPokemonSelection(this.props.id, value, undefined)
+		this.props.addPokemonSelection(this.props.storeKey, this.props.id, value, undefined)
 	}
 
 	onShinyChange = ({ target: { checked } }) => {
-		this.props.addPokemonSelection(this.props.id, undefined, checked)
+		this.props.addPokemonSelection(this.props.storeKey, this.props.id, undefined, checked)
 	}
 
 	render() {
